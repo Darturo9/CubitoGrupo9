@@ -274,6 +274,16 @@ namespace CapaDatosDG
                 lObjComandoDG.Parameters.AddWithValue("@IdPedidoDG", pObjPedidoDG.gIntIdPedidoDG);
                 pObjPedidoDG.gDcmTotalDG = (decimal)lObjComandoDG.ExecuteScalar();
             }
+
+            // Un pedido aprobado puede tener anticipos: el nuevo total no puede quedar debajo de lo pagado
+            using (SqlCommand lObjComandoDG = new SqlCommand("SELECT ISNULL(SUM(MontoDG), 0) FROM dbo.PagosDG WHERE IdPedidoDG = @IdPedidoDG", pObjConexionDG, pObjTransaccionDG))
+            {
+                lObjComandoDG.Parameters.AddWithValue("@IdPedidoDG", pObjPedidoDG.gIntIdPedidoDG);
+                decimal lDcmPagadoDG = (decimal)lObjComandoDG.ExecuteScalar();
+                if (pObjPedidoDG.gDcmTotalDG < lDcmPagadoDG)
+                    throw new InvalidOperationException("El nuevo total (Q" + pObjPedidoDG.gDcmTotalDG.ToString("N2") +
+                        ") es menor a lo que el cliente ya pagó (Q" + lDcmPagadoDG.ToString("N2") + "). Ajuste los precios o elimine un pago.");
+            }
         }
 
         public static string FncDescribirPrendaDG(string pStrNombreDG, string pStrTallaDG, string pStrColorDG)

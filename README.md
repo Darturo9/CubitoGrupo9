@@ -138,3 +138,5 @@ Montos siempre en `decimal`, nunca en `double`.
 | GastosDG | Gastos del taller |
 
 Estados del pedido: `Cotización → Aprobado → En producción → Listo → Entregado`, o `Cancelado` (con motivo).
+
+Pagos: se registran desde que el pedido está `Aprobado` hasta `Listo`. Saldo = Total − pagos; ningún pago puede pasar del saldo y el pedido solo se entrega con saldo 0.

@@ -183,6 +183,8 @@ namespace CapaLogicaNegocioDG
                 pStrMensajeDG += " Se descontaron las prendas del inventario.";
             if (pStrEstadoNuevoDG == PedidoDG.EstadoCanceladoDG && lObjPedidoDG.gStrEstadoDG == PedidoDG.EstadoEnProduccionDG)
                 pStrMensajeDG += " Las prendas ya usadas no regresan solas al inventario; si alguna se recupera, regístrela con una entrada.";
+            if (pStrEstadoNuevoDG == PedidoDG.EstadoCanceladoDG && lObjPedidoDG.gDcmTotalPagadoDG > 0)
+                pStrMensajeDG += " El cliente había pagado Q" + lObjPedidoDG.gDcmTotalPagadoDG.ToString("N2") + "; si corresponde, devuélvale el dinero.";
             return true;
         }
 

@@ -58,6 +58,7 @@ namespace WinCubitoDG
             this.btnProduccionDG = new System.Windows.Forms.Button();
             this.btnListoDG = new System.Windows.Forms.Button();
             this.btnEntregarDG = new System.Windows.Forms.Button();
+            this.btnPagosDG = new System.Windows.Forms.Button();
             this.btnCancelarPedidoDG = new System.Windows.Forms.Button();
             this.btnCerrarDG = new System.Windows.Forms.Button();
             this.gpbDatosDG.SuspendLayout();
@@ -394,6 +395,7 @@ namespace WinCubitoDG
             // flpAccionesDG
             //
             this.flpAccionesDG.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.flpAccionesDG.Controls.Add(this.btnPagosDG);
             this.flpAccionesDG.Controls.Add(this.btnAprobarDG);
             this.flpAccionesDG.Controls.Add(this.btnProduccionDG);
             this.flpAccionesDG.Controls.Add(this.btnListoDG);
@@ -403,6 +405,14 @@ namespace WinCubitoDG
             this.flpAccionesDG.Name = "flpAccionesDG";
             this.flpAccionesDG.Size = new System.Drawing.Size(640, 40);
             this.flpAccionesDG.WrapContents = false;
+            //
+            // btnPagosDG
+            //
+            this.btnPagosDG.Name = "btnPagosDG";
+            this.btnPagosDG.Size = new System.Drawing.Size(110, 34);
+            this.btnPagosDG.TabIndex = 12;
+            this.btnPagosDG.Text = "Pagos...";
+            this.btnPagosDG.Click += new System.EventHandler(this.SubBtnPagosClickDG);
             //
             // btnAprobarDG
             //
@@ -536,6 +546,7 @@ namespace WinCubitoDG
         private System.Windows.Forms.Button btnProduccionDG;
         private System.Windows.Forms.Button btnListoDG;
         private System.Windows.Forms.Button btnEntregarDG;
+        private System.Windows.Forms.Button btnPagosDG;
         private System.Windows.Forms.Button btnCancelarPedidoDG;
         private System.Windows.Forms.Button btnCerrarDG;
     }
