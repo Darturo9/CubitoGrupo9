@@ -1,0 +1,57 @@
+%% Diagrama de flujo de datos (nivel 1): entidades externas, procesos y almacenes
+%% El Dueño aparece dos veces para no cruzar líneas (se permite en un DFD)
+flowchart LR
+    duenoDG["👤 Dueño del taller"]
+    clienteDG["📱 Cliente"]
+    duenoReportesDG["👤 Dueño del taller"]
+
+    p1(("1<br/>Iniciar<br/>sesión"))
+    p2(("2<br/>Gestionar<br/>clientes"))
+    p3(("3<br/>Controlar<br/>inventario"))
+    p4(("4<br/>Gestionar<br/>pedidos"))
+    p5(("5<br/>Registrar<br/>pagos"))
+    p6(("6<br/>Registrar<br/>gastos"))
+    p8(("8<br/>Portal:<br/>cotizar y<br/>consultar"))
+    p7(("7<br/>Generar<br/>reportes"))
+
+    d1[("D1 UsuariosDG")]
+    d2[("D2 ClientesDG")]
+    d3[("D3 ArticulosDG")]
+    d4[("D4 MovimientosInventarioDG")]
+    d5[("D5 PedidosDG +<br/>DetallePedidosDG")]
+    d6[("D6 PagosDG")]
+    d7[("D7 GastosDG")]
+
+    duenoDG <-->|"usuario y contraseña /<br/>acceso al menú"| p1
+    duenoDG <-->|"datos del cliente /<br/>lista de clientes"| p2
+    duenoDG <-->|"artículos y movimientos /<br/>alertas de reorden y kardex"| p3
+    duenoDG <-->|"líneas, precios, estado /<br/>pedido con total"| p4
+    duenoDG <-->|"monto y método /<br/>saldo y cuentas por cobrar"| p5
+    duenoDG -->|"categoría y monto"| p6
+    clienteDG <-->|"cotización o código /<br/>estado y saldo del pedido"| p8
+
+    p1 ---|"hash guardado"| d1
+    p2 <-->|cliente| d2
+    p3 <-->|stock| d3
+    p3 -->|movimiento| d4
+    p4 <-->|pedido y líneas| d5
+    p4 -->|"salida por producción"| d4
+    p4 -->|"descuento de stock"| d3
+    d2 -->|cliente| p4
+    p5 -->|pago| d6
+    d5 -->|"total y estado"| p5
+    p6 -->|gasto| d7
+    p8 <-->|"pedido origen Portal /<br/>estado"| d5
+
+    d3 -->|stock| p7
+    d5 -->|ventas| p7
+    d6 -->|cobros| p7
+    d7 -->|gastos| p7
+    p7 -->|reportes| duenoReportesDG
+
+    classDef externo fill:#ffffff,stroke:#1d2433,stroke-width:2px,color:#1d2433
+    classDef proceso fill:#fde7f1,stroke:#c2185b,color:#5a0b2c
+    classDef almacen fill:#fff4d6,stroke:#c79100,color:#4d3800
+    class duenoDG,clienteDG,duenoReportesDG externo
+    class p1,p2,p3,p4,p5,p6,p7,p8 proceso
+    class d1,d2,d3,d4,d5,d6,d7 almacen

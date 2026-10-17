@@ -1,0 +1,98 @@
+%% Diagrama de clases: capa de lógica de negocio y capa de datos
+classDiagram
+    direction TB
+
+    namespace CapaLogicaNegocioDG {
+        class LogicaUsuarioDG {
+            +FncCalcularHashDG(clave) string
+            +FncIniciarSesionDG(usuario, clave, out mensaje) UsuarioDG
+        }
+        class LogicaClienteDG {
+            +FncBuscarClientesDG(filtro) List~ClienteDG~
+            +FncValidarClienteDG(cliente, out mensaje) bool
+            +FncGuardarClienteDG(cliente, out mensaje) bool
+        }
+        class LogicaInventarioDG {
+            +FncListarArticulosDG(filtro, soloAlertas) List~ArticuloDG~
+            +FncBuscarArticuloDG(id) ArticuloDG
+            +FncValidarArticuloDG(articulo, stockInicial, out mensaje) bool
+            +FncGuardarArticuloDG(articulo, stockInicial, out mensaje) bool
+            +SubDesactivarArticuloDG(id) void
+            +FncRegistrarMovimientoDG(movimiento, out mensaje) bool
+            +FncObtenerKardexDG(id) List~MovimientoInventarioDG~
+            +FncContarAlertasDG(articulos) int
+        }
+        class LogicaPedidoDG {
+            +FncListarPedidosDG(filtro, estado) List~PedidoDG~
+            +FncBuscarPedidoDG(id) PedidoDG
+            +FncListarPrendasDG() List~ArticuloDG~
+            +FncCalcularTotalDG(lineas) decimal
+            +FncEstadosSiguientesDG(estado) List~string~
+            +FncValidarPedidoDG(pedido, out mensaje) bool
+            +FncGuardarPedidoDG(pedido, out mensaje) bool
+            +FncCambiarEstadoDG(id, estadoNuevo, motivo, out mensaje) bool
+        }
+        class LogicaPagoDG {
+            +FncAceptaPagosDG(estado)$ bool
+            +FncListarPagosDG(idPedido) List~PagoDG~
+            +FncListarCuentasPorCobrarDG(filtro) List~PedidoDG~
+            +FncCobradoHoyDG() decimal
+            +FncValidarPagoDG(pago, pedido, out mensaje) bool
+            +FncRegistrarPagoDG(pago, out mensaje) bool
+            +FncEliminarPagoDG(pago, out mensaje) bool
+        }
+    }
+
+    namespace CapaDatosDG {
+        class ConexionDG {
+            +string gStrCadenaConexionDG$
+            +FncCrearConexionDG()$ SqlConnection
+            +FncTextoONuloDG(texto)$ object
+        }
+        class DatosUsuarioDG {
+            +FncBuscarUsuarioActivoDG(usuario) UsuarioDG
+        }
+        class DatosClienteDG {
+            +FncListarClientesDG(filtro) List~ClienteDG~
+            +FncInsertarClienteDG(cliente) int
+            +SubActualizarClienteDG(cliente) void
+        }
+        class DatosArticuloDG {
+            +FncListarArticulosDG(filtro, soloAlertas) List~ArticuloDG~
+            +FncBuscarPorIdDG(id) ArticuloDG
+            +FncExisteCodigoDG(codigo, idExcluir) bool
+            +FncInsertarArticuloDG(articulo, stockInicial) int
+            +SubActualizarArticuloDG(articulo) void
+            +SubDesactivarArticuloDG(id) void
+        }
+        class DatosMovimientoDG {
+            +SubRegistrarMovimientoDG(movimiento) void
+            +SubRegistrarMovimientoDG(movimiento, conexion, transaccion) void
+            +FncListarKardexDG(idArticulo) List~MovimientoInventarioDG~
+        }
+        class DatosPedidoDG {
+            +FncListarPedidosDG(filtro, estado) List~PedidoDG~
+            +FncBuscarPedidoDG(id) PedidoDG
+            +FncInsertarPedidoDG(pedido) int
+            +SubActualizarPedidoDG(pedido) void
+            +SubCambiarEstadoDG(id, estadoActual, estadoNuevo, motivo) void
+            +SubIniciarProduccionDG(pedido) void
+        }
+        class DatosPagoDG {
+            +FncListarPagosDG(idPedido) List~PagoDG~
+            +FncInsertarPagoDG(pago) int
+            +SubEliminarPagoDG(idPago) void
+            +FncTotalCobradoDG(fecha) decimal
+        }
+    }
+
+    LogicaUsuarioDG ..> DatosUsuarioDG
+    LogicaClienteDG ..> DatosClienteDG
+    LogicaInventarioDG ..> DatosArticuloDG
+    LogicaInventarioDG ..> DatosMovimientoDG
+    LogicaPedidoDG ..> DatosPedidoDG
+    LogicaPedidoDG ..> DatosArticuloDG
+    LogicaPagoDG ..> DatosPagoDG
+    LogicaPagoDG ..> DatosPedidoDG
+    DatosPedidoDG ..> DatosMovimientoDG : descuenta stock en la misma transacción
+    DatosArticuloDG ..> DatosMovimientoDG : stock inicial

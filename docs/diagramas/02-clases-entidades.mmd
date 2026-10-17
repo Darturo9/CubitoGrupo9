@@ -1,0 +1,100 @@
+%% Diagrama de clases: capa de entidades (los atributos con / se calculan, no se guardan)
+classDiagram
+    direction LR
+
+    class UsuarioDG {
+        +int gIntIdUsuarioDG
+        +string gStrUsuarioDG
+        +string gStrHashClaveDG
+        +bool gBlnActivoDG
+    }
+
+    class ClienteDG {
+        +int gIntIdClienteDG
+        +string gStrNombreDG
+        +string gStrTelefonoDG
+        +string gStrCorreoDG
+        +DateTime gDtmFechaRegistroDG
+        +bool gBlnActivoDG
+        +string /gStrDescripcionDG
+    }
+
+    class PedidoDG {
+        +int gIntIdPedidoDG
+        +string gStrCodigoDG
+        +int gIntIdClienteDG
+        +string gStrEstadoDG
+        +DateTime gDtmFechaPedidoDG
+        +DateTime? gDtmFechaEntregaDG
+        +decimal gDcmTotalDG
+        +decimal gDcmTotalPagadoDG
+        +string gStrOrigenDG
+        +string gStrObservacionesDG
+        +string gStrMotivoCancelacionDG
+        +List~DetallePedidoDG~ gLstDetallesDG
+        +decimal /gDcmSaldoDG
+        +bool /gBlnEsEditableDG
+    }
+
+    class DetallePedidoDG {
+        +int gIntIdDetalleDG
+        +int gIntIdPedidoDG
+        +string gStrTecnicaDG
+        +int? gIntIdArticuloDG
+        +string gStrDescripcionDG
+        +int gIntCantidadDG
+        +decimal gDcmPrecioUnitarioDG
+        +decimal /gDcmSubtotalDG
+    }
+
+    class PagoDG {
+        +int gIntIdPagoDG
+        +int gIntIdPedidoDG
+        +decimal gDcmMontoDG
+        +string gStrMetodoDG
+        +DateTime gDtmFechaDG
+    }
+
+    class ArticuloDG {
+        +int gIntIdArticuloDG
+        +string gStrCodigoDG
+        +string gStrNombreDG
+        +string gStrTipoDG
+        +string gStrTallaDG
+        +string gStrColorDG
+        +string gStrUnidadDG
+        +decimal gDcmStockDG
+        +decimal gDcmStockMinimoDG
+        +decimal gDcmStockMaximoDG
+        +decimal gDcmCostoUnitarioDG
+        +bool gBlnActivoDG
+        +bool /gBlnRequiereReordenDG
+        +decimal /gDcmCantidadSugeridaDG
+        +string /gStrEstadoStockDG
+    }
+
+    class MovimientoInventarioDG {
+        +int gIntIdMovimientoDG
+        +int gIntIdArticuloDG
+        +string gStrTipoDG
+        +decimal gDcmCantidadDG
+        +string gStrMotivoDG
+        +int? gIntIdPedidoDG
+        +DateTime gDtmFechaDG
+        +decimal /gDcmSaldoDG
+    }
+
+    class GastoDG {
+        +int gIntIdGastoDG
+        +string gStrCategoriaDG
+        +string gStrDescripcionDG
+        +decimal gDcmMontoDG
+        +DateTime gDtmFechaDG
+    }
+
+    ClienteDG "1" --> "0..*" PedidoDG : hace
+    PedidoDG "1" *-- "1..*" DetallePedidoDG : gLstDetallesDG
+    PedidoDG "1" --> "0..*" PagoDG : recibe
+    ArticuloDG "0..1" <-- "0..*" DetallePedidoDG : usa prenda
+    ArticuloDG "1" --> "0..*" MovimientoInventarioDG : kardex
+    PedidoDG "0..1" <-- "0..*" MovimientoInventarioDG : salida por producción

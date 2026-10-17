@@ -1,0 +1,41 @@
+%% Arquitectura por capas de Cubito
+flowchart TB
+    duenoDG(["👤 Dueño del taller"])
+    clienteDG(["📱 Cliente"])
+
+    subgraph presentacionDG["1 · Capa de presentación"]
+        direction LR
+        winDG["<b>WinCubitoDG</b><br/>WinForms · .NET Framework 4.8<br/><small>Login · Inventario · Pedidos · Pagos<br/>Clientes · Gastos · Reportes</small>"]
+        portalDG["<b>PortalWebDG</b><br/>ASP.NET Core Razor Pages · .NET 10<br/><small>Cotizar · Consultar mi pedido</small>"]
+    end
+
+    logicaDG["<b>2 · Capa de lógica de negocio</b> · CapaLogicaNegocioDG<br/><small>LogicaUsuarioDG · LogicaClienteDG · LogicaInventarioDG · LogicaPedidoDG · LogicaPagoDG</small><br/>Valida reglas: precios, stock, estados del pedido, saldo"]
+
+    datosDG["<b>3 · Capa de datos</b> · CapaDatosDG (ADO.NET)<br/><small>ConexionDG · DatosUsuarioDG · DatosClienteDG · DatosArticuloDG<br/>DatosMovimientoDG · DatosPedidoDG · DatosPagoDG</small><br/>Consultas parametrizadas y transacciones"]
+
+    bdDG[("<b>SQL Server Express</b><br/>CubitoDB · 8 tablas")]
+
+    entidadesDG["<b>CapaEntidadesDG</b><br/><small>UsuarioDG · ClienteDG<br/>ArticuloDG<br/>MovimientoInventarioDG<br/>PedidoDG · DetallePedidoDG<br/>PagoDG · GastoDG</small><br/>Objetos que viajan<br/>entre las capas"]
+
+    duenoDG --> winDG
+    clienteDG --> portalDG
+    presentacionDG -->|"llama métodos Fnc / Sub"| logicaDG
+    logicaDG -->|"solo si los datos son válidos"| datosDG
+    datosDG -->|"SQL"| bdDG
+    presentacionDG -.- entidadesDG
+    logicaDG -.-|"usan las entidades"| entidadesDG
+    datosDG -.- entidadesDG
+
+    classDef pres fill:#e3f2fb,stroke:#1f8ac0,color:#0d3c56
+    classDef logi fill:#fde7f1,stroke:#c2185b,color:#5a0b2c
+    classDef dato fill:#fff4d6,stroke:#c79100,color:#4d3800
+    classDef enti fill:#eceff1,stroke:#546e7a,color:#263238
+    classDef base fill:#e8f5e9,stroke:#2e7d32,color:#1b3d1d
+    classDef actor fill:#ffffff,stroke:#1d2433,color:#1d2433
+    class winDG,portalDG pres
+    class logicaDG logi
+    class datosDG dato
+    class entidadesDG enti
+    class bdDG base
+    class duenoDG,clienteDG actor
+    style presentacionDG fill:#f7fbfe,stroke:#1f8ac0

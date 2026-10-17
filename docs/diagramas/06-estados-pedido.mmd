@@ -1,0 +1,26 @@
+%% Ciclo de vida de un pedido (LogicaPedidoDG.FncEstadosSiguientesDG y FncCambiarEstadoDG)
+stateDiagram-v2
+    direction LR
+
+    [*] --> Cotizacion : se crea en escritorio o portal
+    Cotizacion --> Aprobado : Aprobar<br/>todas las líneas con precio
+    Aprobado --> EnProduccion : Enviar a producción<br/>hay stock · descuenta prendas
+    EnProduccion --> Listo : Marcar listo
+    Listo --> Entregado : Entregar<br/>saldo = 0
+    Cotizacion --> Cancelado : con motivo
+    Aprobado --> Cancelado : con motivo
+    EnProduccion --> Cancelado : con motivo
+    Entregado --> [*]
+    Cancelado --> [*]
+
+    state "Cotización" as Cotizacion
+    state "En producción" as EnProduccion
+
+    note right of Cotizacion
+        Se pueden editar líneas y precios
+    end note
+    note left of Aprobado
+        Todavía editable.
+        Desde aquí se reciben pagos
+        hasta que el pedido esté Listo.
+    end note

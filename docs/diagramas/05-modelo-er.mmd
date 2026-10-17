@@ -1,0 +1,83 @@
+%% Modelo entidad-relación de CubitoDB (sql/01-CrearBaseDG.sql)
+erDiagram
+    ClientesDG ||--o{ PedidosDG : "hace"
+    PedidosDG ||--o{ PagosDG : "recibe"
+    PedidosDG ||--|{ DetallePedidosDG : "tiene"
+    PedidosDG |o--o{ MovimientosInventarioDG : "salida por producción"
+    ArticulosDG |o--o{ DetallePedidosDG : "prenda (NULL = del cliente)"
+    ArticulosDG ||--o{ MovimientosInventarioDG : "kardex"
+
+    UsuariosDG {
+        int IdUsuarioDG PK
+        nvarchar UsuarioDG UK
+        char HashClaveDG "SHA-256"
+        bit ActivoDG
+    }
+    ClientesDG {
+        int IdClienteDG PK
+        nvarchar NombreDG
+        varchar TelefonoDG "8 a 15 dígitos"
+        nvarchar CorreoDG "opcional"
+        datetime2 FechaRegistroDG
+        bit ActivoDG
+    }
+    ArticulosDG {
+        int IdArticuloDG PK
+        varchar CodigoDG UK
+        nvarchar NombreDG
+        nvarchar TipoDG "Prenda o Insumo"
+        varchar TallaDG
+        nvarchar ColorDG
+        nvarchar UnidadDG
+        decimal StockDG "nunca negativo"
+        decimal StockMinimoDG
+        decimal StockMaximoDG "mayor o igual al mínimo"
+        decimal CostoUnitarioDG
+        bit ActivoDG
+    }
+    PedidosDG {
+        int IdPedidoDG PK
+        varchar CodigoDG UK "calculado: CUB-0001"
+        int IdClienteDG FK
+        nvarchar EstadoDG "Cotización ... Entregado"
+        datetime2 FechaPedidoDG
+        date FechaEntregaDG
+        decimal TotalDG "suma de subtotales"
+        nvarchar OrigenDG "Escritorio o Portal"
+        nvarchar ObservacionesDG
+        nvarchar MotivoCancelacionDG "obligatorio si Cancelado"
+        datetime2 FechaActualizacionDG
+    }
+    DetallePedidosDG {
+        int IdDetalleDG PK
+        int IdPedidoDG FK
+        nvarchar TecnicaDG "Serigrafía, Sublimación, DTF"
+        int IdArticuloDG FK "NULL si la prenda es del cliente"
+        nvarchar DescripcionDG
+        int CantidadDG "mayor a 0"
+        decimal PrecioUnitarioDG
+        decimal SubtotalDG "calculado"
+    }
+    MovimientosInventarioDG {
+        int IdMovimientoDG PK
+        int IdArticuloDG FK
+        nvarchar TipoDG "Entrada, Salida, Ajuste"
+        decimal CantidadDG "Ajuste puede ser negativo"
+        nvarchar MotivoDG
+        int IdPedidoDG FK "opcional"
+        datetime2 FechaDG
+    }
+    PagosDG {
+        int IdPagoDG PK
+        int IdPedidoDG FK
+        decimal MontoDG "mayor a 0"
+        nvarchar MetodoDG "Efectivo o Transferencia"
+        datetime2 FechaDG
+    }
+    GastosDG {
+        int IdGastoDG PK
+        nvarchar CategoriaDG
+        nvarchar DescripcionDG
+        decimal MontoDG "mayor a 0"
+        date FechaDG
+    }

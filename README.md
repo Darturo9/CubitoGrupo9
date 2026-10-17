@@ -27,6 +27,7 @@ src/
   PortalWebDG/              Portal web para clientes (ASP.NET Core Razor Pages, .NET 10)
 docs/
   PLAN.md                   Plan de ejecución
+  diagramas/                Diagramas (.mmd editable + .png para el informe)
 ```
 
 Las tres capas usan **.NET Standard 2.0**, así el escritorio y el portal comparten exactamente las mismas reglas.
@@ -37,6 +38,8 @@ WinCubitoDG ──┐
 PortalWebDG ──┘
 CapaEntidadesDG: la usan todas las capas
 ```
+
+El detalle está en la sección [Diagramas](#diagramas).
 
 ## Requisitos para trabajar
 
@@ -140,3 +143,35 @@ Montos siempre en `decimal`, nunca en `double`.
 Estados del pedido: `Cotización → Aprobado → En producción → Listo → Entregado`, o `Cancelado` (con motivo).
 
 Pagos: se registran desde que el pedido está `Aprobado` hasta `Listo`. Saldo = Total − pagos; ningún pago puede pasar del saldo y el pedido solo se entrega con saldo 0.
+
+## Diagramas
+
+Están en `docs/diagramas/`. Cada uno tiene su archivo `.mmd` (texto en [Mermaid](https://mermaid.js.org), fácil de editar) y su `.png` listo para el informe.
+
+| # | Diagrama | Qué muestra |
+|---|---|---|
+| 1 | [Arquitectura por capas](docs/diagramas/01-arquitectura.png) | Presentación → lógica → datos → SQL Server, y las entidades que comparten |
+| 2 | [Clases: entidades](docs/diagramas/02-clases-entidades.png) | Las 8 clases de `CapaEntidadesDG`, sus propiedades y relaciones |
+| 3 | [Clases: lógica y datos](docs/diagramas/03-clases-logica-datos.png) | Métodos de cada clase `Logica*` y `Datos*` y quién usa a quién |
+| 4 | [Flujo de datos](docs/diagramas/04-flujo-datos.png) | Procesos del sistema, qué datos entran y salen y en qué tablas se guardan |
+| 5 | [Modelo entidad-relación](docs/diagramas/05-modelo-er.png) | Las 8 tablas con llaves y reglas (CHECK) |
+| 6 | [Estados del pedido](docs/diagramas/06-estados-pedido.png) | Cotización → Entregado, con la condición de cada paso |
+
+### Arquitectura por capas
+
+![Arquitectura por capas](docs/diagramas/01-arquitectura.png)
+
+### Estados del pedido
+
+![Estados del pedido](docs/diagramas/06-estados-pedido.png)
+
+### Volver a generar las imágenes
+
+Si cambian las clases o las tablas, edite el `.mmd` y genere de nuevo el `.png` (necesita Node.js y Google Chrome):
+
+```bash
+npm install -g @mermaid-js/mermaid-cli@11.4.2
+mmdc -i docs/diagramas/01-arquitectura.mmd -o docs/diagramas/01-arquitectura.png -b white -s 2
+```
+
+También se puede pegar el contenido del `.mmd` en [mermaid.live](https://mermaid.live) y descargar la imagen.
