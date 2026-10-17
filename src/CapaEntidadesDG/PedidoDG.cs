@@ -36,6 +36,12 @@ namespace CapaEntidadesDG
             get { return gDcmTotalDG - gDcmTotalPagadoDG; }
         }
 
+        // Las líneas solo se pueden cambiar antes de empezar la producción
+        public bool gBlnEsEditableDG
+        {
+            get { return gStrEstadoDG == EstadoCotizacionDG || gStrEstadoDG == EstadoAprobadoDG; }
+        }
+
         public PedidoDG()
         {
             gStrCodigoDG = string.Empty;

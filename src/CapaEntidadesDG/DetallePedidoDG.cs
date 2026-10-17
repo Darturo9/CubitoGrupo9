@@ -15,6 +15,9 @@ namespace CapaEntidadesDG
         public int gIntCantidadDG { get; set; }
         public decimal gDcmPrecioUnitarioDG { get; set; }
 
+        // Solo para mostrar: "Playera algodón M Blanco" o "Prenda del cliente"
+        public string gStrPrendaDG { get; set; }
+
         public decimal gDcmSubtotalDG
         {
             get { return gIntCantidadDG * gDcmPrecioUnitarioDG; }
@@ -24,6 +27,7 @@ namespace CapaEntidadesDG
         {
             gStrTecnicaDG = TecnicaSerigrafiaDG;
             gStrDescripcionDG = string.Empty;
+            gStrPrendaDG = string.Empty;
         }
     }
 }

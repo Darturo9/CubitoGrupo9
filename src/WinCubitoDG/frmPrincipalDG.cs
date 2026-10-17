@@ -26,7 +26,10 @@ namespace WinCubitoDG
         {
             using (frmInventarioDG lObjFormularioDG = new frmInventarioDG()) lObjFormularioDG.ShowDialog(this);
         }
-        private void SubBtnPedidosClickDG(object pObjSenderDG, EventArgs pObjEventoDG) { SubMostrarPendienteDG("Pedidos"); }
+        private void SubBtnPedidosClickDG(object pObjSenderDG, EventArgs pObjEventoDG)
+        {
+            using (frmPedidosDG lObjFormularioDG = new frmPedidosDG()) lObjFormularioDG.ShowDialog(this);
+        }
         private void SubBtnPagosClickDG(object pObjSenderDG, EventArgs pObjEventoDG) { SubMostrarPendienteDG("Pagos"); }
         private void SubBtnGastosClickDG(object pObjSenderDG, EventArgs pObjEventoDG) { SubMostrarPendienteDG("Gastos"); }
         private void SubBtnReportesClickDG(object pObjSenderDG, EventArgs pObjEventoDG) { SubMostrarPendienteDG("Reportes"); }

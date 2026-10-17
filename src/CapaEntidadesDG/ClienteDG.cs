@@ -12,6 +12,12 @@ namespace CapaEntidadesDG
         public DateTime gDtmFechaRegistroDG { get; set; }
         public bool gBlnActivoDG { get; set; }
 
+        // Texto para listas desplegables: "Ana López · 55551234"
+        public string gStrDescripcionDG
+        {
+            get { return gStrNombreDG + " · " + gStrTelefonoDG; }
+        }
+
         public ClienteDG()
         {
             gStrNombreDG = string.Empty;
