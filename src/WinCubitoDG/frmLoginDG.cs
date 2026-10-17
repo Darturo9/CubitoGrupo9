@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 using CapaEntidadesDG;
 using CapaLogicaNegocioDG;
@@ -15,6 +16,10 @@ namespace WinCubitoDG
         public frmLoginDG()
         {
             InitializeComponent();
+            TemaDG.SubAplicarTemaDG(this);
+            BackColor = Color.White;
+            pnlMarcaDG.BackColor = TemaDG.gObjTintaDG;
+            TemaDG.SubBotonDG(btnIngresarDG, EstiloBotonDG.Primario, IconoDG.CandadoDG);
         }
 
         private void SubBtnIngresarClickDG(object pObjSenderDG, EventArgs pObjEventoDG)

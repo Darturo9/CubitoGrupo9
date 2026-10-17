@@ -91,6 +91,16 @@ Cierra y vuelve a abrir Visual Studio para que tome el cambio.
 3. **Lógica** en `CapaLogicaNegocioDG`: una clase `Logica<Modulo>` que valida y luego llama a datos (ver `LogicaClienteDG.cs`).
 4. **Formulario** en `WinCubitoDG`, o **página** en `PortalWebDG`. El formulario solo llama a la lógica: **nada de SQL en los formularios**.
 5. En `frmPrincipalDG.cs`, cambia el mensaje "en construcción" del botón por la apertura de tu formulario.
+6. **Diseño:** en el constructor del formulario, después de `InitializeComponent()`, aplica el tema para que se vea igual que el resto:
+
+   ```csharp
+   InitializeComponent();
+   TemaDG.SubAplicarTemaDG(this);                                                // colores, botones y grillas
+   TemaDG.SubBotonDG(btnGuardarXX, EstiloBotonDG.Primario, IconoDG.GuardarDG);  // acción principal en magenta
+   TemaDG.SubBotonDG(btnEliminarXX, EstiloBotonDG.Peligro, IconoDG.EliminarDG); // acción destructiva en rojo
+   ```
+
+   Solo un botón **Primario** por pantalla (la acción más común). Los íconos disponibles están en `IconoDG` (`TemaDG.cs`); son de la fuente Segoe Fluent Icons que trae Windows, no hay que descargar nada.
 
 ## Estándares de código
 
@@ -104,7 +114,7 @@ Se siguen los estándares del curso:
 | Funciones (devuelven valor) | Prefijo `Fnc` | `FncCalcularTotalDG` |
 | Métodos (no devuelven valor) | Prefijo `Sub` | `SubGuardarPedidoDG` |
 | Clases, formularios, proyectos | Terminan en las iniciales | `PedidoDG`, `frmPedidosDG` |
-| Controles | `frm`, `txt`, `lbl`, `gpb`, `btn`, `dgv`, `cmb`, `dtp`, `nud` | `txtNombreDG`, `dgvPedidosDG` |
+| Controles | `frm`, `txt`, `lbl`, `gpb`, `btn`, `dgv`, `cmb`, `dtp`, `nud`, `pnl` (panel), `tar` (tarjeta), `mar` (logo) | `txtNombreDG`, `dgvPedidosDG` |
 
 Cada integrante usa **sus propias iniciales** en el código que escribe (pendiente de confirmar con el ingeniero).
 Montos siempre en `decimal`, nunca en `double`.

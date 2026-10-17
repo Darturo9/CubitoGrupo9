@@ -56,7 +56,7 @@ namespace WinCubitoDG
             //
             // lblTotalDG
             //
-            this.lblTotalDG.BackColor = System.Drawing.Color.FromArgb(236, 237, 242);
+            this.lblTotalDG.BackColor = System.Drawing.Color.White;
             this.lblTotalDG.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
             this.lblTotalDG.Location = new System.Drawing.Point(20, 75);
             this.lblTotalDG.Name = "lblTotalDG";
@@ -65,7 +65,7 @@ namespace WinCubitoDG
             //
             // lblPagadoDG
             //
-            this.lblPagadoDG.BackColor = System.Drawing.Color.FromArgb(236, 237, 242);
+            this.lblPagadoDG.BackColor = System.Drawing.Color.White;
             this.lblPagadoDG.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
             this.lblPagadoDG.Location = new System.Drawing.Point(196, 75);
             this.lblPagadoDG.Name = "lblPagadoDG";
@@ -74,7 +74,7 @@ namespace WinCubitoDG
             //
             // lblSaldoDG
             //
-            this.lblSaldoDG.BackColor = System.Drawing.Color.FromArgb(236, 237, 242);
+            this.lblSaldoDG.BackColor = System.Drawing.Color.White;
             this.lblSaldoDG.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
             this.lblSaldoDG.Location = new System.Drawing.Point(372, 75);
             this.lblSaldoDG.Name = "lblSaldoDG";

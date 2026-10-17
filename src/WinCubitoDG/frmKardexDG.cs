@@ -15,6 +15,7 @@ namespace WinCubitoDG
         public frmKardexDG(ArticuloDG pObjArticuloDG)
         {
             InitializeComponent();
+            TemaDG.SubAplicarTemaDG(this);
             gObjArticuloDG = pObjArticuloDG;
             dgvKardexDG.AutoGenerateColumns = false;
             lblArticuloDG.Text = "Kardex de " + pObjArticuloDG.gStrCodigoDG + " - " + pObjArticuloDG.gStrNombreDG +

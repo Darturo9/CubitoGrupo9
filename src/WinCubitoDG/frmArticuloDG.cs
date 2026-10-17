@@ -15,6 +15,8 @@ namespace WinCubitoDG
         public frmArticuloDG(ArticuloDG pObjArticuloDG)
         {
             InitializeComponent();
+            TemaDG.SubAplicarTemaDG(this);
+            TemaDG.SubBotonDG(btnGuardarDG, EstiloBotonDG.Primario, IconoDG.GuardarDG);
             gBlnEsNuevoDG = pObjArticuloDG == null;
             gObjArticuloDG = pObjArticuloDG ?? new ArticuloDG();
 

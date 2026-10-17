@@ -166,7 +166,7 @@ namespace WinCubitoDG
             this.colEstadoDG.DataPropertyName = "gStrEstadoDG";
             this.colEstadoDG.HeaderText = "Estado";
             this.colEstadoDG.Name = "colEstadoDG";
-            this.colEstadoDG.Width = 95;
+            this.colEstadoDG.Width = 105;
             this.colOrigenDG.DataPropertyName = "gStrOrigenDG";
             this.colOrigenDG.HeaderText = "Origen";
             this.colOrigenDG.Name = "colOrigenDG";
@@ -180,7 +180,7 @@ namespace WinCubitoDG
             this.colPagadoDG.DefaultCellStyle = lObjEstiloMonedaDG;
             this.colPagadoDG.HeaderText = "Pagado (Q)";
             this.colPagadoDG.Name = "colPagadoDG";
-            this.colPagadoDG.Width = 80;
+            this.colPagadoDG.Width = 88;
             this.colSaldoDG.DataPropertyName = "gDcmSaldoDG";
             this.colSaldoDG.DefaultCellStyle = lObjEstiloSaldoDG;
             this.colSaldoDG.HeaderText = "Saldo (Q)";

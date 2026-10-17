@@ -139,7 +139,7 @@ namespace WinCubitoDG
             this.colCodigoDG.DataPropertyName = "gStrCodigoDG";
             this.colCodigoDG.HeaderText = "Código";
             this.colCodigoDG.Name = "colCodigoDG";
-            this.colCodigoDG.Width = 95;
+            this.colCodigoDG.Width = 85;
             this.colNombreDG.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colNombreDG.DataPropertyName = "gStrNombreDG";
             this.colNombreDG.HeaderText = "Nombre";
@@ -152,40 +152,40 @@ namespace WinCubitoDG
             this.colTallaDG.DataPropertyName = "gStrTallaDG";
             this.colTallaDG.HeaderText = "Talla";
             this.colTallaDG.Name = "colTallaDG";
-            this.colTallaDG.Width = 50;
+            this.colTallaDG.Width = 45;
             this.colColorDG.DataPropertyName = "gStrColorDG";
             this.colColorDG.HeaderText = "Color";
             this.colColorDG.Name = "colColorDG";
-            this.colColorDG.Width = 70;
+            this.colColorDG.Width = 65;
             this.colUnidadDG.DataPropertyName = "gStrUnidadDG";
             this.colUnidadDG.HeaderText = "Unidad";
             this.colUnidadDG.Name = "colUnidadDG";
-            this.colUnidadDG.Width = 60;
+            this.colUnidadDG.Width = 62;
             this.colStockDG.DataPropertyName = "gDcmStockDG";
             this.colStockDG.DefaultCellStyle = lObjEstiloNumeroDG;
             this.colStockDG.HeaderText = "Stock";
             this.colStockDG.Name = "colStockDG";
-            this.colStockDG.Width = 65;
+            this.colStockDG.Width = 62;
             this.colMinimoDG.DataPropertyName = "gDcmStockMinimoDG";
             this.colMinimoDG.DefaultCellStyle = lObjEstiloNumeroDG;
             this.colMinimoDG.HeaderText = "Mínimo";
             this.colMinimoDG.Name = "colMinimoDG";
-            this.colMinimoDG.Width = 65;
+            this.colMinimoDG.Width = 62;
             this.colMaximoDG.DataPropertyName = "gDcmStockMaximoDG";
             this.colMaximoDG.DefaultCellStyle = lObjEstiloNumeroDG;
             this.colMaximoDG.HeaderText = "Máximo";
             this.colMaximoDG.Name = "colMaximoDG";
-            this.colMaximoDG.Width = 65;
+            this.colMaximoDG.Width = 62;
             this.colEstadoDG.DataPropertyName = "gStrEstadoStockDG";
             this.colEstadoDG.HeaderText = "Estado";
             this.colEstadoDG.Name = "colEstadoDG";
-            this.colEstadoDG.Width = 85;
+            this.colEstadoDG.Width = 82;
             this.colSugeridoDG.DataPropertyName = "gDcmCantidadSugeridaDG";
             this.colSugeridoDG.DefaultCellStyle = lObjEstiloNumeroDG;
             this.colSugeridoDG.HeaderText = "Comprar";
             this.colSugeridoDG.Name = "colSugeridoDG";
             this.colSugeridoDG.ToolTipText = "Cantidad sugerida = Máximo - Stock";
-            this.colSugeridoDG.Width = 70;
+            this.colSugeridoDG.Width = 72;
             //
             // btnNuevoDG
             //
