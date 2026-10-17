@@ -30,4 +30,8 @@ INSERT INTO dbo.ArticulosDG (CodigoDG, NombreDG, TipoDG, TallaDG, ColorDG, Unida
 ('PLA-NE-L', N'Playera algodón', N'Prenda', 'L', N'Negro', N'Unidad', 10, 15, 60, 27.00),
 ('TIN-PLA-BL', N'Tinta plastisol blanca', N'Insumo', NULL, N'Blanco', N'ml', 2500, 1000, 5000, 0.20);
 
+-- El stock inicial también queda en el kardex, para que el saldo coincida con el stock
+INSERT INTO dbo.MovimientosInventarioDG (IdArticuloDG, TipoDG, CantidadDG, MotivoDG)
+SELECT IdArticuloDG, N'Entrada', StockDG, N'Stock inicial' FROM dbo.ArticulosDG WHERE StockDG > 0;
+
 PRINT N'Datos iniciales cargados. Usuario: admin';
