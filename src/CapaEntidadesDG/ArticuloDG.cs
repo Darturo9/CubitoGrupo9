@@ -42,6 +42,28 @@ namespace CapaEntidadesDG
             }
         }
 
+        // Nombre con talla y color: "Playera algodón M Blanco"
+        public string gStrNombreCompletoDG
+        {
+            get
+            {
+                string lStrTextoDG = gStrNombreDG;
+                if (!string.IsNullOrEmpty(gStrTallaDG)) lStrTextoDG += " " + gStrTallaDG;
+                if (!string.IsNullOrEmpty(gStrColorDG)) lStrTextoDG += " " + gStrColorDG;
+                return lStrTextoDG;
+            }
+        }
+
+        // Texto para listas desplegables: "Playera algodón M Blanco (stock 40)"
+        public string gStrDescripcionDG
+        {
+            get
+            {
+                if (gIntIdArticuloDG == 0) return gStrNombreDG;
+                return gStrNombreCompletoDG + " (stock " + gDcmStockDG.ToString("0.##") + ")";
+            }
+        }
+
         // Las prendas y artículos por unidad no aceptan cantidades con decimales
         public bool gBlnUsaCantidadEnteraDG
         {
