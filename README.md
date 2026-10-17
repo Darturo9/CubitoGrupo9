@@ -49,7 +49,7 @@ CapaEntidadesDG: la usan todas las capas
 ### 1. Clonar
 
 ```bash
-git clone https://github.com/Darturo9/Cubito.git
+git clone https://github.com/Darturo9/CubitoGrupo9.git
 ```
 
 ### 2. Crear la base de datos
