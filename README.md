@@ -7,6 +7,7 @@ Proyecto final de Programación 2 · **Grupo 9**.
 |---|---|---|
 | Danilo Giron | 0900-20-1087 | Base de datos y lógica |
 | Elias Israel Canel Ramirez | 0900-25-7066 | Portal web y UI/UX |
+| Luis | Pendiente | Formularios y pruebas |
 | José David Moreno Najarro | 0900-25-17340 | Reportes y documentación |
 
 Plan completo: [docs/PLAN.md](docs/PLAN.md). Entrega: sábado 24 de octubre de 2026.
@@ -113,10 +114,10 @@ Montos siempre en `decimal`, nunca en `double`.
    | Rama | Responsable |
    |---|---|
    | `feature/portal-web` | Elias |
-   | `feature/clientes` | Elias |
-   | `feature/gastos-reportes` | José David |
+   | `feature/clientes` | Luis |
+   | `feature/gastos-reportes` | Luis (gastos) y José David (reportes) |
    | `feature/datos-prueba` | José David |
-   | `feature/inventario`, `feature/pedidos`, `feature/pagos` | Danilo |
+   | `feature/pedidos`, `feature/pagos` | Danilo |
 
 3. Haz commits pequeños con mensajes claros, por ejemplo `Agregar formulario de gastos con validaciones`.
 4. Sube tu rama (`git push`) y abre un **Pull Request** hacia `main` en GitHub. Otro integrante lo revisa antes de unirlo.

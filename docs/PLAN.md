@@ -7,6 +7,7 @@
 |---|---|---|
 | Danilo Giron | 0900-20-1087 | Base de datos y lógica |
 | Elias Israel Canel Ramirez | 0900-25-7066 | Portal web y UI/UX |
+| Luis | Pendiente | Formularios y pruebas |
 | José David Moreno Najarro | 0900-25-17340 | Reportes y documentación |
 
 **Entrega final:** sábado 24 de octubre de 2026. **Presentación del avance:** sábado 17 de octubre de 2026.
@@ -106,27 +107,28 @@ Uso diario desde el celular de los clientes, por eso:
 
 ## 8. Reparto de responsabilidades
 
-Cada integrante debe tener **código propio verificable** (la rúbrica asigna 3 puntos al aporte individual) y debe poder explicar el sistema completo (5 puntos de defensa).
+Cada uno de los cuatro integrantes debe tener **código propio verificable** (la rúbrica asigna 3 puntos al aporte individual) y debe poder explicar el sistema completo (5 puntos de defensa).
 
 | Integrante | Rol | Desarrollo | Documentación y otros |
 |---|---|---|---|
 | **Danilo Giron** | Base de datos y lógica | Script de BD, CapaEntidades, CapaDatos, CapaLógica, módulos Inventario (M3), Pedidos (M4), Pagos (M5) e integración | Arquitectura, diagramas de clases, README técnico |
-| **Elias Israel Canel Ramirez** | Portal web y UI/UX | Portal web (M7): diseño, páginas, conexión a la capa lógica; formulario Clientes (M2); pruebas en celular | Manual de usuario del portal, capturas, video pitch |
-| **José David Moreno Najarro** | Reportes y documentación | Formularios Gastos y Reportes (M5–M6), datos de prueba (seed SQL) | Informe técnico APA (portada, índice, anexos), casos de uso con la plantilla, plan de pruebas, bitácora y actas |
+| **Elias Israel Canel Ramirez** | Portal web y UI/UX | Portal web (M7): prototipo visual, solicitar cotización y consultar pedido | Manual de usuario del portal |
+| **Luis** | Formularios y pruebas | Formularios Clientes (M2) y Gastos (M5); pruebas del portal en celular | Plan de pruebas y evidencias |
+| **José David Moreno Najarro** | Reportes y documentación | Formulario Reportes (M6), datos de prueba (seed SQL) | Informe técnico APA (portada, índice, anexos), casos de uso con la plantilla, validación con el dueño, bitácora y actas |
+| **Los cuatro** | — | — | Video pitch (1:30–3:00), ensayo de la defensa y entrega final |
 
 ## 9. Cronograma (16 al 24 de octubre)
 
-| Fecha | Danilo | Elias | José David | Hito |
-|---|---|---|---|---|
-| Vie 16 | Plan y presentación | — | — | Plan listo |
-| Sáb 17 | Presentar plan; crear repo y accesos | Instalar entorno | Instalar entorno; mensaje al dueño | **Plan aprobado** |
-| Dom 18 | Script de BD + solución con capas | Prototipo visual del portal (HTML/CSS) | Casos de uso CU-01 a CU-04 | Esqueleto compila |
-| Lun 19 | Clientes/artículos en capas + Inventario | Formulario Clientes | Casos de uso CU-05 a CU-08; seed SQL | |
-| Mar 20 | Pedidos con detalle y estados | Portal: solicitar cotización | Formulario Gastos | Flujo pedido funciona |
-| Mié 21 | Pagos, saldos y entrega | Portal: consultar pedido | Formulario Reportes | **Funciones completas** |
-| Jue 22 | Integración y corrección de errores | Pruebas del portal en celular | Plan de pruebas y evidencias | **Congelar código** |
-| Vie 23 | Diagramas y README | Video pitch (1:30–3:00) | Informe y manuales finales | Ensayo de defensa |
-| Sáb 24 | Revisión final | Publicación | Entrega de documentos | **Entrega** |
+| Fecha | Danilo | Elias | Luis | José David | Hito |
+|---|---|---|---|---|---|
+| Sáb 17 | Presentar avance; repositorio y accesos | Instalar entorno | Instalar entorno | Mensaje al dueño | **Plan aprobado** |
+| Dom 18 | Script de BD + solución con capas | Prototipo visual del portal | Formulario Clientes | Casos de uso CU-01 a CU-04 | Esqueleto compila |
+| Lun 19 | Inventario | Prototipo y estructura del portal | Formulario Clientes | Casos de uso CU-05 a CU-08; datos de prueba | |
+| Mar 20 | Pedidos con detalle y estados | Portal: solicitar cotización | Formulario Gastos | Formulario Reportes | Flujo pedido funciona |
+| Mié 21 | Pagos, saldos y entrega | Portal: consultar pedido | Pruebas del portal en celular | Formulario Reportes | **Funciones completas** |
+| Jue 22 | Integración y corrección de errores | Ajustes del portal | Plan de pruebas y evidencias | Informe técnico | **Congelar código** |
+| Vie 23 | Diagramas y README | Manual del portal | Evidencias finales | Informe y anexos | Ensayo y **video pitch (los cuatro)** |
+| Sáb 24 | Revisión final | Revisión final | Revisión final | Entrega de documentos | **Entrega** |
 
 Reunión diaria de 15 minutos (llamada o WhatsApp): qué hice, qué haré, qué me bloquea.
 
