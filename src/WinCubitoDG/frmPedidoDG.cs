@@ -116,6 +116,9 @@ namespace WinCubitoDG
             btnListoDG.Visible = lLstSiguientesDG.Contains(PedidoDG.EstadoListoDG);
             btnEntregarDG.Visible = lLstSiguientesDG.Contains(PedidoDG.EstadoEntregadoDG);
             btnCancelarPedidoDG.Visible = lLstSiguientesDG.Contains(PedidoDG.EstadoCanceladoDG);
+
+            // Los pagos se ven desde que el pedido se aprueba (también el historial de los entregados o cancelados)
+            btnPagosDG.Visible = gObjPedidoDG.gIntIdPedidoDG != 0 && gObjPedidoDG.gStrEstadoDG != PedidoDG.EstadoCotizacionDG;
         }
 
         private void SubActualizarTotalesDG()
@@ -304,9 +307,40 @@ namespace WinCubitoDG
             SubCambiarEstadoDG(PedidoDG.EstadoListoDG, null);
         }
 
+        // Si todavía hay saldo, se ofrece cobrarlo antes de entregar
         private void SubBtnEntregarClickDG(object pObjSenderDG, EventArgs pObjEventoDG)
         {
+            if (gObjPedidoDG.gDcmSaldoDG > 0)
+            {
+                if (MessageBox.Show(this, "El cliente todavía debe Q" + gObjPedidoDG.gDcmSaldoDG.ToString("N2") +
+                        ". El pedido solo se entrega pagado por completo.\n\n¿Registrar el pago ahora?", "Cubito",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                    return;
+                SubAbrirPagosDG();
+                if (gObjPedidoDG.gDcmSaldoDG > 0) return;
+            }
             SubCambiarEstadoDG(PedidoDG.EstadoEntregadoDG, null);
+        }
+
+        // ---------------- Pagos ----------------
+
+        private void SubBtnPagosClickDG(object pObjSenderDG, EventArgs pObjEventoDG)
+        {
+            lblMensajeDG.ForeColor = Color.Firebrick;
+            // Los pagos se validan contra el total guardado, así que primero se guardan los cambios
+            if (gBlnHayCambiosDG && gObjPedidoDG.gBlnEsEditableDG && !FncGuardarDG()) return;
+            SubAbrirPagosDG();
+        }
+
+        private void SubAbrirPagosDG()
+        {
+            using (frmPagoDG lObjFormularioDG = new frmPagoDG(gObjPedidoDG.gIntIdPedidoDG))
+            {
+                lObjFormularioDG.ShowDialog(this);
+                if (!lObjFormularioDG.gBlnSeGuardoAlgoDG) return;
+            }
+            gBlnSeGuardoAlgoDG = true;
+            SubRecargarDG(string.Empty);
         }
 
         private void SubBtnCancelarPedidoClickDG(object pObjSenderDG, EventArgs pObjEventoDG)
