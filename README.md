@@ -7,7 +7,7 @@ Proyecto final de Programación 2 · **Grupo 9**.
 |---|---|---|
 | Danilo Giron | 0900-20-1087 | Base de datos y lógica |
 | Elias Israel Canel Ramirez | 0900-25-7066 | Portal web y UI/UX |
-| Luis | Pendiente | Formularios y pruebas |
+| Luis Pedro Johaido Ramírez Letona | 0900-23-22881 | Formularios y pruebas |
 | José David Moreno Najarro | 0900-25-17340 | Reportes y documentación |
 
 Plan completo: [docs/PLAN.md](docs/PLAN.md). Entrega: sábado 24 de octubre de 2026.

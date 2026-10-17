@@ -7,7 +7,7 @@
 |---|---|---|
 | Danilo Giron | 0900-20-1087 | Base de datos y lógica |
 | Elias Israel Canel Ramirez | 0900-25-7066 | Portal web y UI/UX |
-| Luis | Pendiente | Formularios y pruebas |
+| Luis Pedro Johaido Ramírez Letona | 0900-23-22881 | Formularios y pruebas |
 | José David Moreno Najarro | 0900-25-17340 | Reportes y documentación |
 
 **Entrega final:** sábado 24 de octubre de 2026. **Presentación del avance:** sábado 17 de octubre de 2026.
@@ -113,7 +113,7 @@ Cada uno de los cuatro integrantes debe tener **código propio verificable** (la
 |---|---|---|---|
 | **Danilo Giron** | Base de datos y lógica | Script de BD, CapaEntidades, CapaDatos, CapaLógica, módulos Inventario (M3), Pedidos (M4), Pagos (M5) e integración | Arquitectura, diagramas de clases, README técnico |
 | **Elias Israel Canel Ramirez** | Portal web y UI/UX | Portal web (M7): prototipo visual, solicitar cotización y consultar pedido | Manual de usuario del portal |
-| **Luis** | Formularios y pruebas | Formularios Clientes (M2) y Gastos (M5); pruebas del portal en celular | Plan de pruebas y evidencias |
+| **Luis Pedro Johaido Ramírez Letona** | Formularios y pruebas | Formularios Clientes (M2) y Gastos (M5); pruebas del portal en celular | Plan de pruebas y evidencias |
 | **José David Moreno Najarro** | Reportes y documentación | Formulario Reportes (M6), datos de prueba (seed SQL) | Informe técnico APA (portada, índice, anexos), casos de uso con la plantilla, validación con el dueño, bitácora y actas |
 | **Los cuatro** | — | — | Video pitch (1:30–3:00), ensayo de la defensa y entrega final |
 
