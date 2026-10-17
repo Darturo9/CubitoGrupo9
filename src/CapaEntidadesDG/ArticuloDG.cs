@@ -25,10 +25,27 @@ namespace CapaEntidadesDG
             get { return gDcmStockDG <= gDcmStockMinimoDG; }
         }
 
-        // Cantidad sugerida para volver al stock máximo
+        // Cantidad sugerida para volver al stock máximo (solo cuando hay alerta)
         public decimal gDcmCantidadSugeridaDG
         {
-            get { return gDcmStockMaximoDG - gDcmStockDG > 0 ? gDcmStockMaximoDG - gDcmStockDG : 0; }
+            get { return gBlnRequiereReordenDG ? gDcmStockMaximoDG - gDcmStockDG : 0; }
+        }
+
+        // Texto que se muestra en la grilla
+        public string gStrEstadoStockDG
+        {
+            get
+            {
+                if (gBlnRequiereReordenDG) return "Reordenar";
+                if (gDcmStockDG > gDcmStockMaximoDG) return "Sobre stock";
+                return "Normal";
+            }
+        }
+
+        // Las prendas y artículos por unidad no aceptan cantidades con decimales
+        public bool gBlnUsaCantidadEnteraDG
+        {
+            get { return gStrTipoDG == TipoPrendaDG || gStrUnidadDG == "Unidad"; }
         }
 
         public ArticuloDG()
