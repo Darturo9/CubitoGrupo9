@@ -1,0 +1,27 @@
+# Compila toda la solución en cada Pull Request y en cada cambio a main.
+# Si algo no compila, el PR muestra una ❌ y no se debe unir.
+name: Compilar
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  compilar:
+    runs-on: windows-latest
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Instalar .NET (versión de global.json)
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Restaurar paquetes
+        run: dotnet restore CubitoDG.sln
+
+      - name: Compilar
+        run: dotnet build CubitoDG.sln --no-restore --configuration Release -warnaserror

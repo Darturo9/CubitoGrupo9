@@ -28,6 +28,7 @@ src/
   PortalWebDG/              Portal web para clientes (ASP.NET Core Razor Pages, .NET 10)
 docs/
   PLAN.md                   Plan de ejecución
+  DEMO.md                   Guion de la demostración (ensayo y defensa)
   diagramas/                Diagramas (.mmd editable + .png para el informe)
 ```
 
@@ -125,19 +126,31 @@ Montos siempre en `decimal`, nunca en `double`.
 
 ## Forma de trabajo con Git
 
-1. Antes de empezar, actualiza: `git checkout main` y `git pull`.
-2. Trabaja en la rama de tu módulo:
+1. Antes de empezar, actualiza tu rama con lo último de `main`:
 
-   | Rama | Responsable |
-   |---|---|
-   | `feature/portal-web` | Elias |
-   | `feature/clientes` | Luis |
-   | `feature/gastos-reportes` | Luis (gastos) y José David (reportes) |
-   | `feature/datos-prueba` | José David |
-   | `feature/pedidos`, `feature/pagos` | Danilo |
+   ```bash
+   git checkout main
+   git pull
+   git checkout feature/<tu-rama>
+   git merge main
+   ```
+
+2. Trabaja **solo** en la rama de tu módulo:
+
+   | Rama | Responsable | Issue |
+   |---|---|---|
+   | `feature/clientes` | Luis | #7 |
+   | `feature/gastos` | Luis | #11 |
+   | `feature/reportes` | José David | #14 |
+   | `feature/datos-prueba` | José David | #8 |
+   | `feature/portal-web` | Elias | #10, #13 |
 
 3. Haz commits pequeños con mensajes claros, por ejemplo `Agregar formulario de gastos con validaciones`.
-4. Sube tu rama (`git push`) y abre un **Pull Request** hacia `main` en GitHub. Otro integrante lo revisa antes de unirlo.
+4. Sube tu rama (`git push`) y abre un **Pull Request** hacia `main`. GitHub llena el PR con una lista de verificación: revísala antes de pedir revisión.
+5. En el PR aparece la revisión automática **Compilar**: GitHub compila toda la solución. Si sale ❌, abre el detalle, corrige y vuelve a subir; el PR se actualiza solo.
+6. Danilo revisa el PR, lo prueba con `sql/03-DatosPruebaDG.sql` y lo une a `main`.
+
+**Fecha límite para PRs: 21/10.** El 22/10 se integra todo y desde ese día solo se aceptan correcciones.
 
 **Terminado significa:** compila sin errores, cumple los estándares, las validaciones funcionan, se probó con datos y está documentado.
 
