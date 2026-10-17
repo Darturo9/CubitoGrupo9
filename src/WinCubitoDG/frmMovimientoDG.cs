@@ -20,6 +20,8 @@ namespace WinCubitoDG
         public frmMovimientoDG(ArticuloDG pObjArticuloDG)
         {
             InitializeComponent();
+            TemaDG.SubAplicarTemaDG(this);
+            TemaDG.SubBotonDG(btnGuardarDG, EstiloBotonDG.Primario, IconoDG.GuardarDG);
             gObjArticuloDG = pObjArticuloDG;
 
             string lStrDetalleDG = pObjArticuloDG.gStrTallaDG.Length > 0 ? " · Talla " + pObjArticuloDG.gStrTallaDG : string.Empty;

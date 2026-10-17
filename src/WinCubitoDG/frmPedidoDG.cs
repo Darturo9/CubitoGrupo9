@@ -25,6 +25,16 @@ namespace WinCubitoDG
         public frmPedidoDG(int pIntIdPedidoDG)
         {
             InitializeComponent();
+            TemaDG.SubAplicarTemaDG(this);
+            TemaDG.SubBotonDG(btnAgregarLineaDG, EstiloBotonDG.Secundario, null);
+            TemaDG.SubBotonDG(btnQuitarLineaDG, EstiloBotonDG.Secundario, IconoDG.EliminarDG);
+            TemaDG.SubBotonDG(btnGuardarDG, EstiloBotonDG.Primario, IconoDG.GuardarDG);
+            TemaDG.SubBotonDG(btnPagosDG, EstiloBotonDG.Secundario, IconoDG.PagosDG);
+            TemaDG.SubBotonDG(btnAprobarDG, EstiloBotonDG.Secundario, IconoDG.AprobarDG);
+            TemaDG.SubBotonDG(btnProduccionDG, EstiloBotonDG.Secundario, IconoDG.ProduccionDG);
+            TemaDG.SubBotonDG(btnListoDG, EstiloBotonDG.Secundario, IconoDG.ListoDG);
+            TemaDG.SubBotonDG(btnEntregarDG, EstiloBotonDG.Secundario, IconoDG.EntregarDG);
+            TemaDG.SubBotonDG(btnCancelarPedidoDG, EstiloBotonDG.Peligro, IconoDG.CerrarDG);
             dgvDetalleDG.AutoGenerateColumns = false;
             dgvDetalleDG.DataSource = gLstLineasDG;
             gObjPedidoDG = new PedidoDG { gIntIdPedidoDG = pIntIdPedidoDG };

@@ -16,6 +16,9 @@ namespace WinCubitoDG
         public frmCuentasPorCobrarDG()
         {
             InitializeComponent();
+            TemaDG.SubAplicarTemaDG(this);
+            TemaDG.SubBotonDG(btnRegistrarPagoDG, EstiloBotonDG.Primario, IconoDG.PagosDG);
+            TemaDG.SubBotonDG(btnAbrirDG, EstiloBotonDG.Secundario, IconoDG.AbrirDG);
             dgvCuentasDG.AutoGenerateColumns = false;
         }
 

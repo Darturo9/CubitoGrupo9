@@ -14,6 +14,8 @@ namespace WinCubitoDG
         public frmMotivoDG(string pStrTituloDG, string pStrPreguntaDG)
         {
             InitializeComponent();
+            TemaDG.SubAplicarTemaDG(this);
+            TemaDG.SubBotonDG(btnAceptarDG, EstiloBotonDG.Peligro, null);
             Text = pStrTituloDG;
             lblPreguntaDG.Text = pStrPreguntaDG;
         }

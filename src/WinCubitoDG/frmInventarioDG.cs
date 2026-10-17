@@ -16,6 +16,13 @@ namespace WinCubitoDG
         public frmInventarioDG()
         {
             InitializeComponent();
+            TemaDG.SubAplicarTemaDG(this);
+            TemaDG.SubBotonDG(btnNuevoDG, EstiloBotonDG.Primario, IconoDG.AgregarDG);
+            TemaDG.SubBotonDG(btnEditarDG, EstiloBotonDG.Secundario, IconoDG.EditarDG);
+            TemaDG.SubBotonDG(btnMovimientoDG, EstiloBotonDG.Secundario, IconoDG.MovimientoDG);
+            TemaDG.SubBotonDG(btnKardexDG, EstiloBotonDG.Secundario, IconoDG.KardexDG);
+            TemaDG.SubBotonDG(btnDesactivarDG, EstiloBotonDG.Peligro, IconoDG.EliminarDG);
+            TemaDG.SubBotonDG(btnCerrarDG, EstiloBotonDG.Secundario, null);
             dgvArticulosDG.AutoGenerateColumns = false;
         }
 

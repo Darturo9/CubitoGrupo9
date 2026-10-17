@@ -21,6 +21,9 @@ namespace WinCubitoDG
         public frmPagoDG(int pIntIdPedidoDG)
         {
             InitializeComponent();
+            TemaDG.SubAplicarTemaDG(this);
+            TemaDG.SubBotonDG(btnRegistrarDG, EstiloBotonDG.Primario, IconoDG.PagosDG);
+            TemaDG.SubBotonDG(btnEliminarPagoDG, EstiloBotonDG.Peligro, IconoDG.EliminarDG);
             dgvPagosDG.AutoGenerateColumns = false;
             gIntIdPedidoDG = pIntIdPedidoDG;
         }

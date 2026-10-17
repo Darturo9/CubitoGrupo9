@@ -17,6 +17,9 @@ namespace WinCubitoDG
         public frmPedidosDG()
         {
             InitializeComponent();
+            TemaDG.SubAplicarTemaDG(this);
+            TemaDG.SubBotonDG(btnNuevoDG, EstiloBotonDG.Primario, IconoDG.AgregarDG);
+            TemaDG.SubBotonDG(btnAbrirDG, EstiloBotonDG.Secundario, IconoDG.AbrirDG);
             dgvPedidosDG.AutoGenerateColumns = false;
             cmbEstadoDG.Items.Add(gStrTodosDG);
             cmbEstadoDG.Items.AddRange(LogicaPedidoDG.gArrEstadosDG);
