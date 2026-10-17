@@ -19,6 +19,7 @@ CubitoDG.sln
 sql/
   01-CrearBaseDG.sql        Crea la base CubitoDB y sus 8 tablas
   02-DatosInicialesDG.sql   Usuario admin y algunos registros de ejemplo
+  03-DatosPruebaDG.sql      Datos de prueba: pedidos, pagos y kardex (opcional)
 src/
   CapaEntidadesDG/          Clases de datos (ClienteDG, PedidoDG, ...)
   CapaDatosDG/              Acceso a SQL Server con consultas parametrizadas
@@ -62,6 +63,9 @@ Abre SSMS, conéctate a tu instancia de SQL Express y ejecuta **en este orden** 
 
 1. `sql/01-CrearBaseDG.sql`
 2. `sql/02-DatosInicialesDG.sql`
+3. `sql/03-DatosPruebaDG.sql` *(opcional)*: pedidos en todos los estados, pagos y movimientos de inventario para probar y para la demostración. Las fechas se calculan desde el día en que se ejecuta.
+
+Para volver a empezar, ejecute otra vez los scripts en el mismo orden: `01` borra y crea las tablas.
 
 Se puede volver a ejecutar cuando quieras empezar de cero: borra y vuelve a crear las tablas.
 
