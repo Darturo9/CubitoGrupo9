@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- .NET Standard 2.0: la usan tanto el escritorio (.NET Framework 4.8) como el portal (.NET 10) -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+</Project>

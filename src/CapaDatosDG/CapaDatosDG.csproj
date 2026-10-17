@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.3" />
+    <!-- Versión con parche de seguridad (CVE-2026-84008 y CVE-2026-70162); SqlClient trae la 9.0.13 -->
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="10.0.13" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CapaEntidadesDG\CapaEntidadesDG.csproj" />
+  </ItemGroup>
+</Project>

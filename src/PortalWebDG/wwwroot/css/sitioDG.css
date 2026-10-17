@@ -1,0 +1,87 @@
+/* Estilos base del portal Cubito (mobile first). Colores CMYK de la marca. */
+:root {
+    --tintaDG: #1E2130;
+    --tinta2DG: #3A3F55;
+    --papelDG: #F2F3F7;
+    --blancoDG: #FFFFFF;
+    --magentaDG: #D6006F;
+    --cianDG: #0089C7;
+    --amarilloDG: #F2B200;
+    --verdeDG: #1B9E6A;
+    --radioDG: 12px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--tintaDG);
+    background: var(--papelDG);
+}
+
+.encabezadoDG {
+    background: var(--tintaDG);
+    padding: 14px 16px;
+}
+
+.marcaDG {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--blancoDG);
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.puntosDG { display: inline-flex; gap: 4px; }
+.puntosDG i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+.puntosDG i:nth-child(1) { background: var(--cianDG); }
+.puntosDG i:nth-child(2) { background: var(--magentaDG); }
+.puntosDG i:nth-child(3) { background: var(--amarilloDG); }
+
+.contenidoDG {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 24px 16px 40px;
+}
+
+h1 { font-size: 26px; line-height: 1.2; margin: 0 0 8px; }
+
+.textoSuaveDG { color: var(--tinta2DG); margin: 0 0 24px; }
+
+.accionesDG { display: grid; gap: 12px; }
+
+.botonDG {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 12px 20px;
+    border: 2px solid var(--tintaDG);
+    border-radius: var(--radioDG);
+    background: var(--blancoDG);
+    color: var(--tintaDG);
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.botonPrincipalDG {
+    background: var(--magentaDG);
+    border-color: var(--magentaDG);
+    color: var(--blancoDG);
+}
+
+.botonDG:focus-visible { outline: 3px solid var(--cianDG); outline-offset: 2px; }
+
+.pieDG {
+    text-align: center;
+    font-size: 13px;
+    color: var(--tinta2DG);
+    padding: 16px;
+}

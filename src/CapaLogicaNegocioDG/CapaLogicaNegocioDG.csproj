@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CapaEntidadesDG\CapaEntidadesDG.csproj" />
+    <ProjectReference Include="..\CapaDatosDG\CapaDatosDG.csproj" />
+  </ItemGroup>
+</Project>

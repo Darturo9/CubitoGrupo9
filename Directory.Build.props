@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <Deterministic>true</Deterministic>
+    <Company>Grupo 9 - Programacion 2</Company>
+    <Product>Cubito</Product>
+  </PropertyGroup>
+</Project>

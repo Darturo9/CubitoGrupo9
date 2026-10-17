@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] · Cubito</title>
+    <link rel="stylesheet" href="~/css/sitioDG.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="encabezadoDG">
+        <a class="marcaDG" href="/">
+            <span class="puntosDG" aria-hidden="true"><i></i><i></i><i></i></span>
+            Cubito
+        </a>
+    </header>
+    <main class="contenidoDG">
+        @RenderBody()
+    </main>
+    <footer class="pieDG">Cubito · Serigrafía, sublimación y DTF</footer>
+</body>
+</html>
