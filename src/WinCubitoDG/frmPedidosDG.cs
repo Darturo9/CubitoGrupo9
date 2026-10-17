@@ -67,7 +67,21 @@ namespace WinCubitoDG
         // El estado se pinta con el mismo color que en la pantalla del pedido
         private void SubDgvPedidosCellFormattingDG(object pObjSenderDG, DataGridViewCellFormattingEventArgs pObjEventoDG)
         {
-            if (pObjEventoDG.RowIndex < 0 || dgvPedidosDG.Columns[pObjEventoDG.ColumnIndex] != colEstadoDG) return;
+            if (pObjEventoDG.RowIndex < 0) return;
+
+            // Una cotización todavía no se cobra y un pedido cancelado ya no: no tienen saldo pendiente
+            if (dgvPedidosDG.Columns[pObjEventoDG.ColumnIndex] == colSaldoDG)
+            {
+                PedidoDG lObjPedidoDG = dgvPedidosDG.Rows[pObjEventoDG.RowIndex].DataBoundItem as PedidoDG;
+                if (lObjPedidoDG != null && !LogicaPagoDG.FncAceptaPagosDG(lObjPedidoDG.gStrEstadoDG) && lObjPedidoDG.gStrEstadoDG != PedidoDG.EstadoEntregadoDG)
+                {
+                    pObjEventoDG.Value = "—";
+                    pObjEventoDG.FormattingApplied = true;
+                }
+                return;
+            }
+
+            if (dgvPedidosDG.Columns[pObjEventoDG.ColumnIndex] != colEstadoDG) return;
             switch (pObjEventoDG.Value as string)
             {
                 case PedidoDG.EstadoAprobadoDG: pObjEventoDG.CellStyle.BackColor = Color.FromArgb(204, 231, 245); break;

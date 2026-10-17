@@ -81,7 +81,7 @@ namespace WinCubitoDG
                 int lIntCotizacionesDG = lLstPedidosDG.Count(lObjPedidoDG => lObjPedidoDG.gStrEstadoDG == PedidoDG.EstadoCotizacionDG);
                 int lIntListosDG = lLstPedidosDG.Count(lObjPedidoDG => lObjPedidoDG.gStrEstadoDG == PedidoDG.EstadoListoDG);
                 tarActivosDG.gStrValorIndicadorDG = lIntActivosDG.ToString();
-                tarActivosDG.gStrDetalleIndicadorDG = lIntCotizacionesDG == 1 ? "1 cotización por responder" : lIntCotizacionesDG + " cotizaciones por responder";
+                tarActivosDG.gStrDetalleIndicadorDG = lIntCotizacionesDG == 1 ? "1 cotización pendiente" : lIntCotizacionesDG + " cotizaciones pendientes";
                 tarListosDG.gStrValorIndicadorDG = lIntListosDG.ToString();
                 tarListosDG.gStrDetalleIndicadorDG = lIntListosDG == 0 ? "Nada pendiente de entregar" : "Avise al cliente";
 
