@@ -94,4 +94,3 @@ Los números de octubre ya incluyen lo hecho en los pasos 3, 4 y 6 (CUB-0012, lo
 
 - Arquitectura en capas y diagramas: `docs/diagramas/` (mostrar `01-arquitectura.png` y `06-estados-pedido.png`).
 - Las reglas viven en la capa de lógica y la base las vuelve a proteger (CHECK, transacciones), así ningún formulario puede saltárselas.
-- Siguiente etapa: un portal web para que los clientes pidan cotizaciones y consulten su pedido. Las capas ya están en .NET Standard 2.0 para poder reutilizarlas.

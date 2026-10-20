@@ -11,6 +11,8 @@ classDiagram
             +FncBuscarClientesDG(filtro) List~ClienteDG~
             +FncValidarClienteDG(cliente, out mensaje) bool
             +FncGuardarClienteDG(cliente, out mensaje) bool
+            +FncHistorialClienteDG(id) List~PedidoDG~
+            +FncDesactivarClienteDG(cliente, out mensaje) bool
         }
         class LogicaInventarioDG {
             +FncListarArticulosDG(filtro, soloAlertas) List~ArticuloDG~
@@ -41,6 +43,19 @@ classDiagram
             +FncRegistrarPagoDG(pago, out mensaje) bool
             +FncEliminarPagoDG(pago, out mensaje) bool
         }
+        class LogicaGastoDG {
+            +string[] gArrCategoriasDG$
+            +FncListarGastosMesDG(anio, mes, categoria) List~GastoDG~
+            +FncCategoriaPrincipalDG(gastos) string
+            +FncValidarGastoDG(gasto, out mensaje) bool
+            +FncGuardarGastoDG(gasto, out mensaje) bool
+            +FncEliminarGastoDG(gasto, out mensaje) bool
+        }
+        class LogicaReporteDG {
+            +FncResumenMesDG(anio, mes) ResumenMesDG
+            +FncComparacionDG(actual, anterior, mesAnterior) string
+            +FncGenerarCsvDG(resumen) string
+        }
     }
 
     namespace CapaDatosDG {
@@ -56,6 +71,8 @@ classDiagram
             +FncListarClientesDG(filtro) List~ClienteDG~
             +FncInsertarClienteDG(cliente) int
             +SubActualizarClienteDG(cliente) void
+            +FncExisteTelefonoDG(telefono, idExcluir) bool
+            +SubDesactivarClienteDG(id) void
         }
         class DatosArticuloDG {
             +FncListarArticulosDG(filtro, soloAlertas) List~ArticuloDG~
@@ -84,15 +101,27 @@ classDiagram
             +SubEliminarPagoDG(idPago) void
             +FncTotalCobradoDG(fecha) decimal
         }
+        class DatosGastoDG {
+            +FncListarGastosDG(desde, hasta, categoria) List~GastoDG~
+            +FncInsertarGastoDG(gasto) int
+            +SubActualizarGastoDG(gasto) void
+            +SubEliminarGastoDG(id) void
+        }
+        class DatosReporteDG {
+            +FncObtenerResumenDG(desde, hasta) ResumenMesDG
+        }
     }
 
     LogicaUsuarioDG ..> DatosUsuarioDG
     LogicaClienteDG ..> DatosClienteDG
+    LogicaClienteDG ..> DatosPedidoDG : historial
     LogicaInventarioDG ..> DatosArticuloDG
     LogicaInventarioDG ..> DatosMovimientoDG
     LogicaPedidoDG ..> DatosPedidoDG
     LogicaPedidoDG ..> DatosArticuloDG
     LogicaPagoDG ..> DatosPagoDG
     LogicaPagoDG ..> DatosPedidoDG
+    LogicaGastoDG ..> DatosGastoDG
+    LogicaReporteDG ..> DatosReporteDG
     DatosPedidoDG ..> DatosMovimientoDG : descuenta stock en la misma transacción
     DatosArticuloDG ..> DatosMovimientoDG : stock inicial

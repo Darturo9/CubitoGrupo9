@@ -4,7 +4,7 @@ using Microsoft.Data.SqlClient;
 namespace CapaDatosDG
 {
     // Punto único para obtener conexiones a SQL Server Express.
-    // El escritorio y el portal asignan la cadena al iniciar.
+    // La aplicación de escritorio asigna la cadena al iniciar.
     public static class ConexionDG
     {
         public static string gStrCadenaConexionDG { get; set; }

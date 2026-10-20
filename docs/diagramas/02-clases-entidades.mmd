@@ -92,9 +92,28 @@ classDiagram
         +DateTime gDtmFechaDG
     }
 
+    class ResumenMesDG {
+        +DateTime gDtmMesDG
+        +decimal gDcmVentasDG
+        +int gIntPedidosDG
+        +decimal gDcmCobradoDG
+        +decimal gDcmGastosDG
+        +List~FilaReporteDG~ gLstTecnicasDG
+        +List~FilaReporteDG~ gLstClientesDG
+        +List~FilaReporteDG~ gLstCategoriasDG
+        +decimal /gDcmGananciaDG
+    }
+
+    class FilaReporteDG {
+        +string gStrConceptoDG
+        +int gIntCantidadDG
+        +decimal gDcmMontoDG
+    }
+
     ClienteDG "1" --> "0..*" PedidoDG : hace
     PedidoDG "1" *-- "1..*" DetallePedidoDG : gLstDetallesDG
     PedidoDG "1" --> "0..*" PagoDG : recibe
     ArticuloDG "0..1" <-- "0..*" DetallePedidoDG : usa prenda
     ArticuloDG "1" --> "0..*" MovimientoInventarioDG : kardex
     PedidoDG "0..1" <-- "0..*" MovimientoInventarioDG : salida por producción
+    ResumenMesDG "1" *-- "0..*" FilaReporteDG : tablas del reporte

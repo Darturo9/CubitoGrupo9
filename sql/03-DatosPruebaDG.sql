@@ -78,7 +78,7 @@ WHERE MotivoDG = N'Stock inicial';
 -- -------------------------------------------------------------
 -- 11 pedidos, al menos uno en cada estado:
 --   Entregado: 3 · Listo: 2 (uno atrasado) · En producción: 1 · Aprobado: 2
---   Cotización: 2 (una del portal sin precio) · Cancelado: 1
+--   Cotización: 2 (una todavía sin precio) · Cancelado: 1
 -- Reglas que se respetan, igual que en la aplicación:
 --   - Los pagos solo existen desde Aprobado y nunca pasan del total.
 --   - Entregado = pagado por completo.
@@ -183,9 +183,9 @@ INSERT INTO dbo.DetallePedidosDG (IdPedidoDG, TecnicaDG, IdArticuloDG, Descripci
 INSERT INTO dbo.PagosDG (IdPedidoDG, MontoDG, MetodoDG, FechaDG) VALUES
 (@IdPedidoDG, 250.00, N'Efectivo', @AhoraDG);
 
--- Pedido 9: Café La Esquina · Cotización del portal, todavía sin precio
+-- Pedido 9: Café La Esquina · Cotización pedida por WhatsApp, todavía sin precio
 INSERT INTO dbo.PedidosDG (IdClienteDG, EstadoDG, FechaPedidoDG, FechaEntregaDG, OrigenDG, ObservacionesDG, FechaActualizacionDG)
-VALUES (@IdCafeDG, N'Cotización', DATEADD(HOUR, -20, @AhoraDG), DATEADD(DAY, 7, @HoyDG), N'Portal', N'Solicitado desde el portal', DATEADD(HOUR, -20, @AhoraDG));
+VALUES (@IdCafeDG, N'Cotización', DATEADD(HOUR, -20, @AhoraDG), DATEADD(DAY, 7, @HoyDG), N'Escritorio', N'Pedido por WhatsApp, falta definir el precio', DATEADD(HOUR, -20, @AhoraDG));
 SET @IdPedidoDG = SCOPE_IDENTITY();
 INSERT INTO dbo.DetallePedidosDG (IdPedidoDG, TecnicaDG, IdArticuloDG, DescripcionDG, CantidadDG, PrecioUnitarioDG) VALUES
 (@IdPedidoDG, N'DTF', NULL, N'Delantales con logo del café', 6, 0);

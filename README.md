@@ -6,7 +6,7 @@ Proyecto final de Programación 2 · **Grupo 9**.
 | Integrante | Carné | Área |
 |---|---|---|
 | Danilo Giron | 0900-20-1087 | Base de datos y lógica |
-| Elias Israel Canel Ramirez | 0900-25-7066 | Portal web y UI/UX |
+| Elias Israel Canel Ramirez | 0900-25-7066 | UI/UX y documentación |
 | Luis Pedro Johaido Ramírez Letona | 0900-23-22881 | Formularios y pruebas |
 | José David Moreno Najarro | 0900-25-17340 | Reportes y documentación |
 
@@ -25,14 +25,13 @@ src/
   CapaDatosDG/              Acceso a SQL Server con consultas parametrizadas
   CapaLogicaNegocioDG/      Reglas y validaciones del negocio
   WinCubitoDG/              Aplicación de escritorio (Windows Forms, .NET Framework 4.8)
-  PortalWebDG/              Base del portal web para clientes (siguiente etapa, no forma parte de esta entrega)
 docs/
   PLAN.md                   Plan de ejecución
   DEMO.md                   Guion de la demostración (ensayo y defensa)
   diagramas/                Diagramas (.mmd editable + .png para el informe)
 ```
 
-Las tres capas usan **.NET Standard 2.0**, así un portal web futuro podrá usar exactamente las mismas reglas que el escritorio.
+La presentación solo habla con la lógica, y la lógica es la única que habla con los datos.
 
 ```text
 WinCubitoDG ──> CapaLogicaNegocioDG ──> CapaDatosDG ──> SQL Server Express (CubitoDB)
@@ -43,8 +42,8 @@ El detalle está en la sección [Diagramas](#diagramas).
 
 ## Requisitos para trabajar
 
-1. **Visual Studio 2022 o superior** con las cargas de trabajo *Desarrollo de escritorio de .NET* y *ASP.NET y desarrollo web*.
-2. **.NET Framework 4.8** (viene con Windows 10/11). Para el escritorio sirve cualquier SDK de .NET 8 o más nuevo (el que trae Visual Studio). Solo el portal necesita el **SDK de .NET 10**.
+1. **Visual Studio 2022 o superior** con las cargas de trabajo *Desarrollo de escritorio de .NET*.
+2. **.NET Framework 4.8** (viene con Windows 10/11) y cualquier SDK de .NET 8 o más nuevo (el que trae Visual Studio).
 3. **SQL Server Express** y **SQL Server Management Studio (SSMS)**.
 4. **Git**.
 
@@ -139,7 +138,6 @@ Montos siempre en `decimal`, nunca en `double`.
    | `feature/gastos` | Luis | #11 |
    | `feature/reportes` | José David | #14 |
    | `feature/datos-prueba` | José David | #8 |
-   | `feature/portal-web` | Elias | #10, #13 |
 
 3. Haz commits pequeños con mensajes claros, por ejemplo `Agregar formulario de gastos con validaciones`.
 4. Sube tu rama (`git push`) y abre un **Pull Request** hacia `main`. GitHub llena el PR con una lista de verificación: revísala antes de pedir revisión.
