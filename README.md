@@ -46,7 +46,7 @@ El detalle está en la sección [Diagramas](#diagramas).
 ## Requisitos para trabajar
 
 1. **Visual Studio 2022 o superior** con las cargas de trabajo *Desarrollo de escritorio de .NET* y *ASP.NET y desarrollo web*.
-2. **.NET Framework 4.8** (viene con Windows 10/11) y el **SDK de .NET 10**.
+2. **.NET Framework 4.8** (viene con Windows 10/11). Para el escritorio sirve cualquier SDK de .NET 8 o más nuevo (el que trae Visual Studio). Solo el portal necesita el **SDK de .NET 10**.
 3. **SQL Server Express** y **SQL Server Management Studio (SSMS)**.
 4. **Git**.
 
