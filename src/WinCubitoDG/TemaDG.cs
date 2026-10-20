@@ -38,7 +38,7 @@ namespace WinCubitoDG
         public const string CalendarioDG = "";
     }
 
-    // Colores, fuentes y estilos comunes. Los colores son los mismos del portal web (sitioDG.css).
+    // Colores, fuentes y estilos comunes de todas las pantallas.
     public static class TemaDG
     {
         public static readonly Color gObjTintaDG = Color.FromArgb(0x1E, 0x21, 0x30);
@@ -124,7 +124,7 @@ namespace WinCubitoDG
             }
         }
 
-        // Botón plano con borde fino; el principal va en magenta (igual que el portal)
+        // Botón plano con borde fino; el principal va en magenta (color de la marca)
         public static void SubBotonDG(Button pObjBotonDG, EstiloBotonDG pObjEstiloDG, string pStrIconoDG)
         {
             pObjBotonDG.FlatStyle = FlatStyle.Flat;

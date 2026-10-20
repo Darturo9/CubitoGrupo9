@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace WinCubitoDG
 {
-    // Logo de Cubito: tres puntos CMYK y el nombre (igual que el encabezado del portal)
+    // Logo de Cubito: tres puntos CMYK y el nombre
     public class MarcaDG : Control
     {
         public MarcaDG()

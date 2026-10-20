@@ -2,7 +2,7 @@
 stateDiagram-v2
     direction LR
 
-    [*] --> Cotizacion : se crea en escritorio o portal
+    [*] --> Cotizacion : se crea el pedido
     Cotizacion --> Aprobado : Aprobar<br/>todas las líneas con precio
     Aprobado --> EnProduccion : Enviar a producción<br/>hay stock · descuenta prendas
     EnProduccion --> Listo : Marcar listo

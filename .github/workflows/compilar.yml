@@ -15,11 +15,10 @@ jobs:
       - name: Descargar el código
         uses: actions/checkout@v4
 
-      # El portal usa .NET 10; las capas y el escritorio compilan con cualquier SDK desde .NET 8
-      - name: Instalar .NET 10
+      - name: Instalar .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: '8.0.x'
 
       - name: Restaurar paquetes
         run: dotnet restore CubitoDG.sln
