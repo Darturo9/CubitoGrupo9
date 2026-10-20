@@ -118,12 +118,12 @@ namespace WinCubitoDG
             SubCargarIndicadoresDG();
         }
 
-        private void SubBtnClientesClickDG(object pObjSenderDG, EventArgs pObjEventoDG) { SubMostrarPendienteDG("Clientes"); }
+        private void SubBtnClientesClickDG(object pObjSenderDG, EventArgs pObjEventoDG) { SubAbrirDG(new frmClientesDG()); }
         private void SubBtnInventarioClickDG(object pObjSenderDG, EventArgs pObjEventoDG) { SubAbrirDG(new frmInventarioDG()); }
         private void SubBtnPedidosClickDG(object pObjSenderDG, EventArgs pObjEventoDG) { SubAbrirDG(new frmPedidosDG()); }
         private void SubBtnPagosClickDG(object pObjSenderDG, EventArgs pObjEventoDG) { SubAbrirDG(new frmCuentasPorCobrarDG()); }
-        private void SubBtnGastosClickDG(object pObjSenderDG, EventArgs pObjEventoDG) { SubMostrarPendienteDG("Gastos"); }
-        private void SubBtnReportesClickDG(object pObjSenderDG, EventArgs pObjEventoDG) { SubMostrarPendienteDG("Reportes"); }
+        private void SubBtnGastosClickDG(object pObjSenderDG, EventArgs pObjEventoDG) { SubAbrirDG(new frmGastosDG()); }
+        private void SubBtnReportesClickDG(object pObjSenderDG, EventArgs pObjEventoDG) { SubAbrirDG(new frmReportesDG()); }
 
         private void SubBtnSalirClickDG(object pObjSenderDG, EventArgs pObjEventoDG)
         {
