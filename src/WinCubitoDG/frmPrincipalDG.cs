@@ -104,26 +104,18 @@ namespace WinCubitoDG
             }
         }
 
-        // Cada integrante reemplaza este mensaje por la apertura de su formulario,
-        // por ejemplo: using (frmClientesXX lObjFormularioXX = new frmClientesXX()) lObjFormularioXX.ShowDialog(this);
-        private void SubMostrarPendienteDG(string pStrModuloDG)
-        {
-            MessageBox.Show(this, "El módulo " + pStrModuloDG + " está en construcción.", "Cubito",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
         private void SubAbrirDG(Form pObjFormularioDG)
         {
             using (pObjFormularioDG) pObjFormularioDG.ShowDialog(this);
             SubCargarIndicadoresDG();
         }
 
-        private void SubBtnClientesClickDG(object pObjSenderDG, EventArgs pObjEventoDG) { SubMostrarPendienteDG("Clientes"); }
+        private void SubBtnClientesClickDG(object pObjSenderDG, EventArgs pObjEventoDG) { SubAbrirDG(new frmClientesDG()); }
         private void SubBtnInventarioClickDG(object pObjSenderDG, EventArgs pObjEventoDG) { SubAbrirDG(new frmInventarioDG()); }
         private void SubBtnPedidosClickDG(object pObjSenderDG, EventArgs pObjEventoDG) { SubAbrirDG(new frmPedidosDG()); }
         private void SubBtnPagosClickDG(object pObjSenderDG, EventArgs pObjEventoDG) { SubAbrirDG(new frmCuentasPorCobrarDG()); }
-        private void SubBtnGastosClickDG(object pObjSenderDG, EventArgs pObjEventoDG) { SubMostrarPendienteDG("Gastos"); }
-        private void SubBtnReportesClickDG(object pObjSenderDG, EventArgs pObjEventoDG) { SubMostrarPendienteDG("Reportes"); }
+        private void SubBtnGastosClickDG(object pObjSenderDG, EventArgs pObjEventoDG) { SubAbrirDG(new frmGastosDG()); }
+        private void SubBtnReportesClickDG(object pObjSenderDG, EventArgs pObjEventoDG) { SubAbrirDG(new frmReportesDG()); }
 
         private void SubBtnSalirClickDG(object pObjSenderDG, EventArgs pObjEventoDG)
         {

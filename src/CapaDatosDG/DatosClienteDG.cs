@@ -78,5 +78,35 @@ namespace CapaDatosDG
                 lObjComandoDG.ExecuteNonQuery();
             }
         }
+
+        // Indica si otro cliente activo ya usa ese teléfono (idExcluir = el cliente que se está editando)
+        public bool FncExisteTelefonoDG(string pStrTelefonoDG, int pIntIdExcluirDG)
+        {
+            const string lStrConsultaDG =
+                "SELECT COUNT(*) FROM dbo.ClientesDG WHERE ActivoDG = 1 AND TelefonoDG = @TelefonoDG AND IdClienteDG <> @IdExcluirDG";
+
+            using (SqlConnection lObjConexionDG = ConexionDG.FncCrearConexionDG())
+            using (SqlCommand lObjComandoDG = new SqlCommand(lStrConsultaDG, lObjConexionDG))
+            {
+                lObjComandoDG.Parameters.AddWithValue("@TelefonoDG", (pStrTelefonoDG ?? string.Empty).Trim());
+                lObjComandoDG.Parameters.AddWithValue("@IdExcluirDG", pIntIdExcluirDG);
+                lObjConexionDG.Open();
+                return (int)lObjComandoDG.ExecuteScalar() > 0;
+            }
+        }
+
+        // Desactiva el cliente: deja de aparecer en las listas, pero su historial se conserva
+        public void SubDesactivarClienteDG(int pIntIdClienteDG)
+        {
+            const string lStrConsultaDG = "UPDATE dbo.ClientesDG SET ActivoDG = 0 WHERE IdClienteDG = @IdClienteDG";
+
+            using (SqlConnection lObjConexionDG = ConexionDG.FncCrearConexionDG())
+            using (SqlCommand lObjComandoDG = new SqlCommand(lStrConsultaDG, lObjConexionDG))
+            {
+                lObjComandoDG.Parameters.AddWithValue("@IdClienteDG", pIntIdClienteDG);
+                lObjConexionDG.Open();
+                lObjComandoDG.ExecuteNonQuery();
+            }
+        }
     }
 }

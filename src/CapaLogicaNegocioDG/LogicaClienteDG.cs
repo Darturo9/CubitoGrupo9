@@ -10,6 +10,7 @@ namespace CapaLogicaNegocioDG
     public class LogicaClienteDG
     {
         private readonly DatosClienteDG gObjDatosClienteDG = new DatosClienteDG();
+        private readonly DatosPedidoDG gObjDatosPedidoDG = new DatosPedidoDG();
 
         public List<ClienteDG> FncBuscarClientesDG(string pStrFiltroDG)
         {
@@ -44,6 +45,11 @@ namespace CapaLogicaNegocioDG
         public bool FncGuardarClienteDG(ClienteDG pObjClienteDG, out string pStrMensajeDG)
         {
             if (!FncValidarClienteDG(pObjClienteDG, out pStrMensajeDG)) return false;
+            if (gObjDatosClienteDG.FncExisteTelefonoDG(pObjClienteDG.gStrTelefonoDG, pObjClienteDG.gIntIdClienteDG))
+            {
+                pStrMensajeDG = "Ya hay otro cliente con el teléfono " + pObjClienteDG.gStrTelefonoDG.Trim() + ".";
+                return false;
+            }
 
             if (pObjClienteDG.gIntIdClienteDG == 0)
                 pObjClienteDG.gIntIdClienteDG = gObjDatosClienteDG.FncInsertarClienteDG(pObjClienteDG);
@@ -51,6 +57,35 @@ namespace CapaLogicaNegocioDG
                 gObjDatosClienteDG.SubActualizarClienteDG(pObjClienteDG);
 
             pStrMensajeDG = "Cliente guardado correctamente.";
+            return true;
+        }
+
+        // Pedidos del cliente, del más reciente al más antiguo
+        public List<PedidoDG> FncHistorialClienteDG(int pIntIdClienteDG)
+        {
+            return gObjDatosPedidoDG.FncListarPedidosDG(string.Empty, string.Empty)
+                .Where(lObjPedidoDG => lObjPedidoDG.gIntIdClienteDG == pIntIdClienteDG)
+                .ToList();
+        }
+
+        // No se desactiva un cliente con pedidos en curso: primero se entregan o cancelan
+        public bool FncDesactivarClienteDG(ClienteDG pObjClienteDG, out string pStrMensajeDG)
+        {
+            pStrMensajeDG = string.Empty;
+            if (pObjClienteDG == null || pObjClienteDG.gIntIdClienteDG <= 0) { pStrMensajeDG = "Seleccione el cliente."; return false; }
+
+            int lIntActivosDG = FncHistorialClienteDG(pObjClienteDG.gIntIdClienteDG)
+                .Count(lObjPedidoDG => lObjPedidoDG.gStrEstadoDG != PedidoDG.EstadoEntregadoDG && lObjPedidoDG.gStrEstadoDG != PedidoDG.EstadoCanceladoDG);
+            if (lIntActivosDG > 0)
+            {
+                pStrMensajeDG = pObjClienteDG.gStrNombreDG.Trim() + (lIntActivosDG == 1
+                    ? " tiene 1 pedido en curso. Entréguelo o cancélelo antes de desactivarlo."
+                    : " tiene " + lIntActivosDG + " pedidos en curso. Entréguelos o cancélelos antes de desactivarlo.");
+                return false;
+            }
+
+            gObjDatosClienteDG.SubDesactivarClienteDG(pObjClienteDG.gIntIdClienteDG);
+            pStrMensajeDG = "Se desactivó a " + pObjClienteDG.gStrNombreDG.Trim() + ". Su historial se conserva.";
             return true;
         }
     }
