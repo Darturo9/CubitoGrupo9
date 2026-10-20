@@ -19,25 +19,23 @@ CubitoDG.sln
 sql/
   01-CrearBaseDG.sql        Crea la base CubitoDB y sus 8 tablas
   02-DatosInicialesDG.sql   Usuario admin y algunos registros de ejemplo
-  03-DatosPruebaDG.sql      Datos de prueba: pedidos, pagos y kardex (opcional)
+  03-DatosPruebaDG.sql      Datos de prueba: clientes, artículos, pedidos, pagos y gastos (opcional)
 src/
   CapaEntidadesDG/          Clases de datos (ClienteDG, PedidoDG, ...)
   CapaDatosDG/              Acceso a SQL Server con consultas parametrizadas
   CapaLogicaNegocioDG/      Reglas y validaciones del negocio
   WinCubitoDG/              Aplicación de escritorio (Windows Forms, .NET Framework 4.8)
-  PortalWebDG/              Portal web para clientes (ASP.NET Core Razor Pages, .NET 10)
+  PortalWebDG/              Base del portal web para clientes (siguiente etapa, no forma parte de esta entrega)
 docs/
   PLAN.md                   Plan de ejecución
   DEMO.md                   Guion de la demostración (ensayo y defensa)
   diagramas/                Diagramas (.mmd editable + .png para el informe)
 ```
 
-Las tres capas usan **.NET Standard 2.0**, así el escritorio y el portal comparten exactamente las mismas reglas.
+Las tres capas usan **.NET Standard 2.0**, así un portal web futuro podrá usar exactamente las mismas reglas que el escritorio.
 
 ```text
-WinCubitoDG ──┐
-              ├──> CapaLogicaNegocioDG ──> CapaDatosDG ──> SQL Server Express (CubitoDB)
-PortalWebDG ──┘
+WinCubitoDG ──> CapaLogicaNegocioDG ──> CapaDatosDG ──> SQL Server Express (CubitoDB)
 CapaEntidadesDG: la usan todas las capas
 ```
 
@@ -84,18 +82,16 @@ Cierra y vuelve a abrir Visual Studio para que tome el cambio.
 
 - **Escritorio:** en Visual Studio, clic derecho en `WinCubitoDG` → *Establecer como proyecto de inicio* → F5.
   Usuario de demostración: `admin`, contraseña: `Cubito2026`.
-- **Portal web:** clic derecho en `PortalWebDG` → *Establecer como proyecto de inicio* → F5. Se abre en `https://localhost:7090`.
-  La primera vez Visual Studio pide confiar en el certificado de desarrollo: acepta.
 
 ## Cómo agregar un módulo
 
-`Clientes` ya tiene lista su capa de datos y de lógica y sirve de ejemplo:
+Todos los módulos siguen el mismo patrón; `Clientes` sirve de ejemplo:
 
 1. **Entidad** en `CapaEntidadesDG` (ya existen las 8).
 2. **Datos** en `CapaDatosDG`: una clase `Datos<Modulo>` con consultas parametrizadas (ver `DatosClienteDG.cs`). Nunca concatenar texto del usuario en el SQL.
 3. **Lógica** en `CapaLogicaNegocioDG`: una clase `Logica<Modulo>` que valida y luego llama a datos (ver `LogicaClienteDG.cs`).
-4. **Formulario** en `WinCubitoDG`, o **página** en `PortalWebDG`. El formulario solo llama a la lógica: **nada de SQL en los formularios**.
-5. En `frmPrincipalDG.cs`, cambia el mensaje "en construcción" del botón por la apertura de tu formulario.
+4. **Formulario** en `WinCubitoDG`. El formulario solo llama a la lógica: **nada de SQL en los formularios**.
+5. En `frmPrincipalDG.cs`, el botón del menú abre el formulario con `SubAbrirDG(new frmModuloDG())`.
 6. **Diseño:** en el constructor del formulario, después de `InitializeComponent()`, aplica el tema para que se vea igual que el resto:
 
    ```csharp

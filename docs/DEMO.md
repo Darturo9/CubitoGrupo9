@@ -7,11 +7,12 @@ Duración estimada: 12 a 15 minutos. Cada integrante presenta el módulo que hiz
 ## Antes de empezar
 
 1. En SSMS ejecutar, en orden: `sql/01-CrearBaseDG.sql`, `sql/02-DatosInicialesDG.sql` y `sql/03-DatosPruebaDG.sql`.
-   Debe terminar con *Datos de prueba cargados: 11 pedidos y 9 pagos.*
-2. Abrir la aplicación de escritorio (`WinCubitoDG`) y dejar el portal (`PortalWebDG`) corriendo en otra ventana.
+   Debe terminar con *Datos de prueba cargados: 10 clientes, 15 artículos, 11 pedidos, 9 pagos y 15 gastos.*
+2. Abrir la aplicación de escritorio (`WinCubitoDG`).
 3. Tener a mano: usuario `admin`, contraseña `Cubito2026`.
 
-> Los pasos que crean datos (pedido nuevo, pagos) cambian los números. Para repetir el ensayo, vuelva a ejecutar los tres scripts.
+> Los pasos que crean datos (pedido nuevo, pagos, gasto) cambian los números. Para repetir el ensayo, vuelva a ejecutar los tres scripts.
+> Las fechas de los datos se calculan desde el día en que se ejecuta el script. Los números de *Gastos* y *Reportes* son los de octubre de 2026, siguiendo los pasos en este orden.
 
 ## 1. Inicio de sesión y panel (Danilo)
 
@@ -40,7 +41,7 @@ Punto a resaltar: la contraseña se guarda como hash SHA-256, nunca en texto.
 | **Nuevo pedido**: Carlos Pérez, Serigrafía, *Playera algodón M Blanco* × 5 a Q50, "Logo al frente" → **Guardar** | Se crea **CUB-0012** en *Cotización*, total Q250.00 |
 | **Aprobar** | Pasa a *Aprobado* |
 | **Enviar a producción** | Pide confirmación porque descuenta 5 playeras. PLA-BL-M baja de 20 a **15** y entra en alerta (15 ≤ mínimo 15) |
-| Abrir **CUB-0009** (cotización del portal sin precio) → **Aprobar** | *Para aprobar, todas las líneas deben tener precio.* |
+| Abrir **CUB-0009** (cotización sin precio) → **Aprobar** | *Para aprobar, todas las líneas deben tener precio.* |
 | Abrir **CUB-0007** → **Cancelar pedido** sin escribir motivo | No se puede: el motivo es obligatorio |
 
 ## 4. Pagos (Danilo)
@@ -53,24 +54,44 @@ Punto a resaltar: la contraseña se guarda como hash SHA-256, nunca en texto.
 | Abrir **CUB-0005** (Listo) → **Entregar** | Avisa que faltan Q200.00 y ofrece cobrar. Cobrar Q200 → **Entregar** → *Entregado* |
 | Volver al inicio | Los indicadores se actualizan solos |
 
-## 5. Clientes (Luis)
+## 5. Clientes
 
-> Se completa al integrar el formulario de Clientes (#7).
+| Paso | Qué se ve |
+|---|---|
+| Inicio → **Clientes** | 10 clientes. Buscar "colegio" filtra por nombre; también se puede buscar por teléfono |
+| Seleccionar **Colegio San José** | Historial: CUB-0006 (*En producción*) y CUB-0001 (*Entregado*). *2 pedidos · Comprado: Q3,390.00 · Debe: Q1,275.00* en rojo |
+| **Nuevo** con teléfono `55551234` | *Ya hay otro cliente con el teléfono 55551234.* (es de Ana López) |
+| Escribir un teléfono con letras o de menos de 8 dígitos | *El teléfono debe tener entre 8 y 15 dígitos, sin espacios ni guiones.* |
+| Colegio San José → **Desactivar** | No se puede: *tiene 1 pedido en curso. Entréguelo o cancélelo antes de desactivarlo.* |
 
-## 6. Gastos (Luis)
+Punto a resaltar: desactivar no borra al cliente; su historial y sus pedidos se conservan.
 
-> Se completa al integrar el formulario de Gastos (#11).
+## 6. Gastos
 
-## 7. Reportes (José David)
+| Paso | Qué se ve |
+|---|---|
+| Inicio → **Gastos** | Mes actual: *7 gastos en octubre 2026 · Total: Q2,586.75 · Mayor gasto: Alquiler* |
+| Cambiar el mes a septiembre | 8 gastos, total Q2,969.90 |
+| **Nuevo** con monto 0 o fecha de mañana | *El monto debe ser mayor a cero.* / *La fecha no puede ser futura.* |
+| Registrar Q150.00, *Insumos y materiales*, "Tinta blanca plastisol" | *Gasto de Q150.00 guardado.* Octubre: 8 gastos, total **Q2,736.75** |
+| Filtrar por *Servicios básicos* | Solo luz e internet |
 
-> Se completa al integrar el formulario de Reportes (#14). Con los datos de prueba ya hay ventas y cobros de varias semanas para mostrar.
+Punto a resaltar: las categorías son una lista fija para que el reporte agrupe bien.
 
-## 8. Portal web (Elias)
+## 7. Reportes
 
-> Se completa al integrar *Solicitar cotización* (#10) y *Consultar mi pedido* (#13).
-> Idea para la demo: pedir una cotización desde el celular y mostrar que aparece en **Pedidos** del escritorio como *Cotización* con origen *Portal*.
+| Paso | Qué se ve |
+|---|---|
+| Inicio → **Reportes** (octubre) | **Ventas Q4,590.00** (7 pedidos, ▲ 114 % vs septiembre) · **Cobrado Q3,575.00** · **Gastos Q2,736.75** (▼ 8 %) · **Ganancia Q838.25** |
+| Explicar la ganancia | Ganancia = lo cobrado − los gastos del mes (dinero que realmente entró y salió) |
+| Grillas | Por técnica: DTF Q2,930.00, Serigrafía Q1,390.00, Sublimación Q270.00 · Mejores clientes: Colegio San José primero · Gastos por categoría: Alquiler primero |
+| Cambiar a septiembre | Ganancia **−Q1,899.90**: ese mes se gastó más de lo que se cobró |
+| **Exportar CSV** | Se abre en Excel con el resumen y las tres tablas |
 
-## 9. Cierre
+Los números de octubre ya incluyen lo hecho en los pasos 3, 4 y 6 (CUB-0012, los pagos de Q100 y Q200 y el gasto de Q150).
+
+## 8. Cierre
 
 - Arquitectura en capas y diagramas: `docs/diagramas/` (mostrar `01-arquitectura.png` y `06-estados-pedido.png`).
-- Las reglas viven en la capa de lógica y la base las vuelve a proteger (CHECK, transacciones), así el escritorio y el portal no pueden saltárselas.
+- Las reglas viven en la capa de lógica y la base las vuelve a proteger (CHECK, transacciones), así ningún formulario puede saltárselas.
+- Siguiente etapa: un portal web para que los clientes pidan cotizaciones y consulten su pedido. Las capas ya están en .NET Standard 2.0 para poder reutilizarlas.

@@ -104,14 +104,6 @@ namespace WinCubitoDG
             }
         }
 
-        // Cada integrante reemplaza este mensaje por la apertura de su formulario,
-        // por ejemplo: using (frmClientesXX lObjFormularioXX = new frmClientesXX()) lObjFormularioXX.ShowDialog(this);
-        private void SubMostrarPendienteDG(string pStrModuloDG)
-        {
-            MessageBox.Show(this, "El módulo " + pStrModuloDG + " está en construcción.", "Cubito",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
         private void SubAbrirDG(Form pObjFormularioDG)
         {
             using (pObjFormularioDG) pObjFormularioDG.ShowDialog(this);
