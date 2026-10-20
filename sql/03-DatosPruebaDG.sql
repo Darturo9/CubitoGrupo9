@@ -7,10 +7,10 @@
 -- siempre hay entregas atrasadas, pedidos para hoy y cobros de hoy.
 --
 -- Secciones:
---   1. Clientes        (José David completa hasta 10 clientes)
---   2. Artículos       (José David completa hasta 15 artículos)
---   3. Pedidos y pagos (Danilo)
---   4. Gastos          (José David)
+--   1. Clientes        (10 en total con los del script 02)
+--   2. Artículos       (15 en total, con su stock inicial en el kardex)
+--   3. Pedidos y pagos
+--   4. Gastos          (el mes pasado y este, para comparar en Reportes)
 -- Los pedidos buscan clientes y artículos por nombre/código, no por Id,
 -- así agregar registros en las secciones 1 y 2 no los afecta.
 -- =============================================================
@@ -39,12 +39,33 @@ BEGIN TRANSACTION;
 INSERT INTO dbo.ClientesDG (NombreDG, TelefonoDG, CorreoDG, FechaRegistroDG) VALUES
 (N'Academia de Fútbol Los Pumas', '47781122', N'pumas.academia@correo.com', DATEADD(DAY, -40, SYSDATETIME())),
 (N'Café La Esquina', '23456789', N'cafelaesquina@correo.com', DATEADD(DAY, -35, SYSDATETIME())),
-(N'Iglesia Vida Nueva', '58904433', NULL, DATEADD(DAY, -30, SYSDATETIME()));
+(N'Iglesia Vida Nueva', '58904433', NULL, DATEADD(DAY, -30, SYSDATETIME())),
+(N'Restaurante El Fogón', '24781590', N'elfogon@correo.com', DATEADD(DAY, -28, SYSDATETIME())),
+(N'Gimnasio Fuerza Total', '51234098', N'fuerzatotal@correo.com', DATEADD(DAY, -21, SYSDATETIME())),
+(N'Sofía Hernández', '30987766', N'sofia.hernandez@correo.com', DATEADD(DAY, -15, SYSDATETIME())),
+(N'Panadería San Martín', '22410077', NULL, DATEADD(DAY, -7, SYSDATETIME()));
 
 -- -------------------------------------------------------------
 -- 2. Artículos
 -- -------------------------------------------------------------
--- (José David)
+-- Todos quedan sobre su mínimo: la única alerta de reorden es PLA-NE-L.
+INSERT INTO dbo.ArticulosDG (CodigoDG, NombreDG, TipoDG, TallaDG, ColorDG, UnidadDG, StockDG, StockMinimoDG, StockMaximoDG, CostoUnitarioDG) VALUES
+('PLA-BL-S', N'Playera algodón', N'Prenda', 'S', N'Blanco', N'Unidad', 25, 10, 60, 24.00),
+('PLA-BL-L', N'Playera algodón', N'Prenda', 'L', N'Blanco', N'Unidad', 30, 10, 60, 25.00),
+('PLA-NE-M', N'Playera algodón', N'Prenda', 'M', N'Negro', N'Unidad', 18, 15, 60, 27.00),
+('PLA-RO-M', N'Playera algodón', N'Prenda', 'M', N'Rojo', N'Unidad', 12, 10, 40, 27.00),
+('POL-BL-M', N'Playera polo', N'Prenda', 'M', N'Blanco', N'Unidad', 15, 5, 30, 45.00),
+('SUD-GR-L', N'Sudadero con capucha', N'Prenda', 'L', N'Gris', N'Unidad', 10, 5, 25, 85.00),
+('GOR-NE-U', N'Gorra', N'Prenda', 'Única', N'Negro', N'Unidad', 20, 10, 50, 22.00),
+('TAZ-BL-11', N'Taza para sublimar 11 oz', N'Insumo', NULL, N'Blanco', N'Unidad', 36, 12, 72, 12.50),
+('TIN-PLA-NE', N'Tinta plastisol negra', N'Insumo', NULL, N'Negro', N'ml', 1800, 800, 5000, 0.20),
+('PAP-SUB', N'Papel de sublimación', N'Insumo', NULL, NULL, N'Hoja', 300, 100, 1000, 1.50),
+('PEL-DTF', N'Película DTF', N'Insumo', NULL, NULL, N'Metro', 25, 10, 100, 18.00),
+('EMU-FOT', N'Emulsión fotográfica', N'Insumo', NULL, NULL, N'ml', 900, 300, 2000, 0.35);
+
+INSERT INTO dbo.MovimientosInventarioDG (IdArticuloDG, TipoDG, CantidadDG, MotivoDG)
+SELECT IdArticuloDG, N'Entrada', StockDG, N'Stock inicial' FROM dbo.ArticulosDG
+WHERE StockDG > 0 AND IdArticuloDG NOT IN (SELECT IdArticuloDG FROM dbo.MovimientosInventarioDG);
 
 -- El stock inicial del script 02 se registra hace 30 días para que el kardex
 -- quede en orden: primero el stock inicial y después las salidas por producción.
@@ -191,7 +212,28 @@ JOIN (SELECT IdPedidoDG, SUM(SubtotalDG) AS TotalDG FROM dbo.DetallePedidosDG GR
 -- -------------------------------------------------------------
 -- 4. Gastos
 -- -------------------------------------------------------------
--- (José David)
+-- El mes pasado completo y lo que va de este mes. Los de este mes nunca
+-- quedan en el futuro: el día se calcula dentro de lo que va del mes.
+DECLARE @InicioMesDG DATE = DATEFROMPARTS(YEAR(@HoyDG), MONTH(@HoyDG), 1);
+DECLARE @InicioAnteriorDG DATE = DATEADD(MONTH, -1, @InicioMesDG);
+DECLARE @DiasDelMesDG INT = DAY(@HoyDG);
+
+INSERT INTO dbo.GastosDG (CategoriaDG, DescripcionDG, MontoDG, FechaDG) VALUES
+(N'Alquiler', N'Alquiler del local', 1200.00, @InicioAnteriorDG),
+(N'Servicios básicos', N'Energía eléctrica', 285.40, DATEADD(DAY, 3, @InicioAnteriorDG)),
+(N'Servicios básicos', N'Internet', 199.00, DATEADD(DAY, 3, @InicioAnteriorDG)),
+(N'Insumos y materiales', N'Tintas plastisol (4 colores)', 340.00, DATEADD(DAY, 6, @InicioAnteriorDG)),
+(N'Prendas', N'24 playeras blancas al proveedor', 600.00, DATEADD(DAY, 10, @InicioAnteriorDG)),
+(N'Transporte', N'Envío de pedidos', 60.00, DATEADD(DAY, 14, @InicioAnteriorDG)),
+(N'Mantenimiento', N'Limpieza y ajuste del pulpo de serigrafía', 150.00, DATEADD(DAY, 20, @InicioAnteriorDG)),
+(N'Insumos y materiales', N'Papel de sublimación', 135.50, DATEADD(DAY, 25, @InicioAnteriorDG)),
+(N'Alquiler', N'Alquiler del local', 1200.00, @InicioMesDG),
+(N'Servicios básicos', N'Energía eléctrica', 312.75, DATEADD(DAY, 2 % @DiasDelMesDG, @InicioMesDG)),
+(N'Servicios básicos', N'Internet', 199.00, DATEADD(DAY, 2 % @DiasDelMesDG, @InicioMesDG)),
+(N'Insumos y materiales', N'Película DTF y polvo adhesivo', 280.00, DATEADD(DAY, 5 % @DiasDelMesDG, @InicioMesDG)),
+(N'Prendas', N'Sudaderos para la promoción del colegio', 450.00, DATEADD(DAY, 8 % @DiasDelMesDG, @InicioMesDG)),
+(N'Transporte', N'Combustible para entregas', 85.00, DATEADD(DAY, 11 % @DiasDelMesDG, @InicioMesDG)),
+(N'Otros', N'Bolsas para entrega', 60.00, DATEADD(DAY, 15 % @DiasDelMesDG, @InicioMesDG));
 
 COMMIT TRANSACTION;
 GO
@@ -211,7 +253,11 @@ ELSE
 BEGIN
     DECLARE @IntPedidosDG INT = (SELECT COUNT(*) FROM dbo.PedidosDG);
     DECLARE @IntPagosDG INT = (SELECT COUNT(*) FROM dbo.PagosDG);
-    PRINT N'Datos de prueba cargados: ' + CAST(@IntPedidosDG AS NVARCHAR(10)) + N' pedidos y ' + CAST(@IntPagosDG AS NVARCHAR(10)) + N' pagos.';
+    DECLARE @IntClientesDG INT = (SELECT COUNT(*) FROM dbo.ClientesDG);
+    DECLARE @IntArticulosDG INT = (SELECT COUNT(*) FROM dbo.ArticulosDG);
+    DECLARE @IntGastosDG INT = (SELECT COUNT(*) FROM dbo.GastosDG);
+    PRINT N'Datos de prueba cargados: ' + CAST(@IntClientesDG AS NVARCHAR(10)) + N' clientes, ' + CAST(@IntArticulosDG AS NVARCHAR(10)) + N' artículos, ' +
+          CAST(@IntPedidosDG AS NVARCHAR(10)) + N' pedidos, ' + CAST(@IntPagosDG AS NVARCHAR(10)) + N' pagos y ' + CAST(@IntGastosDG AS NVARCHAR(10)) + N' gastos.';
 END
 GO
 
